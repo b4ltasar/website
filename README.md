@@ -5,17 +5,6 @@
 ## LIVE WEBSITE
 **https://nearweek.com**
 
-## AUTOMATIZED WORKFLOW
-
-### HOW IT WORKS:
-1. **Du:** "Opdater nearweek.com fra Figma"
-2. **Claude:** Henter dit Figma Sites design
-3. **Claude:** Konverterer til HTML/CSS/JS  
-4. **Claude:** Viser dig preview
-5. **Du:** "Deploy det!" eller "Lav rettelser"
-6. **Claude:** Pusher til GitHub automatisk
-7. **GitHub Actions:** Deployer til nearweek.com (~ 2 minutter)
-
 ## REPOSITORY STRUCTURE:
 nearweek-website/
 ├── index.html                    # Hovedside (auto-genereret)
@@ -38,6 +27,7 @@ nearweek-website/
 - **Trigger:** Push til `main` branch
 - **Tid:** ~2-3 minutter fra commit til live
 - **Status:** Se [Actions tab](https://github.com/b4ltasar/website/actions)
+- **Preview of page before changes deployed: https://b4ltasar.github.io/website/
 
 ## DNS CONFIGURATION
 
