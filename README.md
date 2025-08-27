@@ -27,7 +27,7 @@ nearweek-website/
 - **Trigger:** Push til `main` branch
 - **Tid:** ~2-3 minutter fra commit til live
 - **Status:** Se [Actions tab](https://github.com/b4ltasar/website/actions)
-- **Preview of page before changes deployed: https://b4ltasar.github.io/website/
+- Preview of page before changes deployed: https://b4ltasar.github.io/website/
 
 ## DNS CONFIGURATION
 
