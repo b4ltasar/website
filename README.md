@@ -1,4 +1,4 @@
-#** NEARWEEK**
+#  NEARWEEK
 
 > Automatisk Figma til GitHub workflow for nearweek.com
 
