@@ -1,13 +1,13 @@
-# NEARWEEK
+#** NEARWEEK**
 
 > Automatisk Figma til GitHub workflow for nearweek.com
 
-## Live Website
+## LIVE WEBSITE
 **https://nearweek.com**
 
-## ⚡ Automatiseret Workflow
+## AUTOMATIZED WORKFLOW
 
-### Sådan fungerer det:
+### HOW IT WORKS:
 1. **Du:** "Opdater nearweek.com fra Figma"
 2. **Claude:** Henter dit Figma Sites design
 3. **Claude:** Konverterer til HTML/CSS/JS  
@@ -16,7 +16,7 @@
 6. **Claude:** Pusher til GitHub automatisk
 7. **GitHub Actions:** Deployer til nearweek.com (~ 2 minutter)
 
-## Repository Struktur
+## REPOSITORY STRUCTURE:
 nearweek-website/
 ├── index.html                    # Hovedside (auto-genereret)
 ├── styles-main.css              # Stylesheet
@@ -43,16 +43,16 @@ nearweek-website/
 
 At domainprovider add the following DNS records:
 
-### A Records:
+### A RECORDS:
 Type: A | Name: @ | Value: 185.199.108.153
 Type: A | Name: @ | Value: 185.199.109.153
 Type: A | Name: @ | Value: 185.199.110.153
 Type: A | Name: @ | Value: 185.199.111.153
 
-### CNAME Record:
+### CNAME RECORDS:
 Type: CNAME | Name: www | Value: b4ltasar.github.io
 
-## 🤖 AI Commands
+## AI COMMANDS
 
 ### PRIMARY COMMANDS:
 - `"Opdater nearweek.com fra Figma"` - Fuld update med preview
@@ -73,7 +73,7 @@ Type: CNAME | Name: www | Value: b4ltasar.github.io
 
 - **Website:** ✅ Live på nearweek.com
 - **Auto-deploy:** ✅ Configured  
-- **DNS:** ⏳ Needs setup
+- **DNS:** Needs setup
 - **SSL:** ✅ Secure HTTPS
 - **Performance:** ✅ Optimized
 - **SEO:** ✅ Ready for indexing
