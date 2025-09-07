@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEARWEEK - Exploring Where AI meets Crypto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Header */
+        .header {
+            background: #f8f8f8;
+            padding: 24px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 28px;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 48px;
+        }
+
+        .nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+
+        .nav a:hover {
+            opacity: 0.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-headline {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 32px;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .hero-visual {
+            background: #1a1a1a;
+            border-radius: 8px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Newsletter Section */
+        .newsletter-feed {
+            display: none;
+            padding: 80px 0;
+            background: white;
+            margin: 40px 0;
+        }
+
+        .newsletter-feed.active {
+            display: block;
+        }
+
+        .newsletter-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .newsletter-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .newsletter-items {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .newsletter-fallback {
+            background: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .newsletter-fallback h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .newsletter-fallback p {
+            margin-bottom: 24px;
+            color: #666;
+        }
+
+        .newsletter-fallback a {
+            background: #1a1a1a;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin: 8px;
+        }
+
+        /* Cards */
+        .cards-section {
+            padding: 80px 0;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 280px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Main CTA */
+        .main-cta {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .main-headline {
+            font-size: 72px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .main-subheadline {
+            font-size: 20px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 80px;
+        }
+
+        /* Newsletter Signup */
+        .newsletter-section {
+            background: white;
+            border: 2px solid #1a1a1a;
+            margin: 80px auto;
+            max-width: 800px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-size: 24px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            background: #1a1a1a;
+            color: white;
+            padding: 16px 48px;
+            border: none;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #333;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 0 40px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            font-size: 24px;
+            color: #1a1a1a;
+        }
+
+        .footer-tagline {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+
+        .footer-nav a:hover {
+            opacity: 0.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .social-icon:hover {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav {
+                display: none;
+            }
+            
+            .hero-headline {
+                font-size: 36px;
+            }
+            
+            .main-headline {
+                font-size: 40px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="#" class="logo" onclick="showHome()">NEARWEEK</a>
+                    <div class="tagline">EXPLORING WHERE AI MEETS CRYPTO</div>
+                </div>
+                
+                <nav class="nav">
+                    <a onclick="showNewsletter()">NEWSLETTER</a>
+                    <a href="#blog">BLOG</a>
+                    <a href="#community">COMMUNITY</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div id="home-content">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-headline">THE END IS NEAR</h1>
+                        <div class="hero-description">
+                            NEARWEEK deliver curated news, insightful analysis, and real-time updates on the builders, projects, and innovations shaping the future of AI x Web3.
+                            <br><br>
+                            Our mission is to connect the global NEAR community with trusted information, enabling everyone to understand, participate in, and help build the open web.
+                            <br><br>
+                            Stay informed. Stay early. Stay NEAR.
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <img src="./images/webpage-loop.gif" alt="NEARWEEK website loop animation" onerror="this.style.display='none'; this.parentElement.innerHTML='HERO IMAGE';">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cards-section">
+            <div class="container">
+                <div class="cards-grid">
+                    <div class="card" onclick="showNewsletter()">
+                        <div class="card-image">
+                            <img src="./images/newsletter-card.jpg" alt="Newsletter" onerror="this.style.display='none'; this.parentElement.innerHTML='NEWSLETTER';">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">READ THE LATEST NEWSLETTER</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="./images/ai-superchain-card.jpg" alt="AI Superchain" onerror="this.style.display='none'; this.parentElement.innerHTML='AI SUPERCHAIN';">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">THE AI SUPERCHAIN</div>
+                            <div class="card-subtitle">BY PETER HAARMAN, FOUNDER NEARWEEK</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="./images/sovereignty-card.jpg" alt="Reclaim Your Sovereignty" onerror="this.style.display='none'; this.parentElement.innerHTML='SOVEREIGNTY';">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">[RECLAIM YOUR SOVEREIGNTY]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-cta">
+            <div class="container">
+                <h2 class="main-headline">DATA IS POWER.</h2>
+                <div class="main-subheadline">
+                    BUILD THE FUTURE YOU WANT TO PASS<br>
+                    TO FUTURE GENERATIONS.
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter-section">
+            <h3 class="newsletter-title">SIGN UP FOR THE OFFICIAL NEAR NEWSLETTER</h3>
+            <a href="https://nearweek.us1.list-manage.com/subscribe?u=ed13caf5cf7d37689d81ef60b&id=86d4e11a12" target="_blank" class="cta-button">Subscribe Now</a>
+        </section>
+    </div>
+
+    <div id="newsletter-content" class="newsletter-feed">
+        <div class="container">
+            <div class="newsletter-header">
+                <h2>NEARWEEK Newsletter</h2>
+                <p>Latest updates from the NEAR ecosystem</p>
+            </div>
+            <div class="newsletter-items" id="newsletter-items">
+                <div class="loading">Loading newsletter content...</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">NEARWEEK</div>
+                    <div class="footer-tagline">EXPLORING WHERE AI MEETS CRYPTO</div>
+                </div>
+                
+                <nav class="footer-nav">
+                    <a onclick="showNewsletter()">NEWSLETTER</a>
+                    <a href="#blog">BLOG</a>
+                    <a href="#community">COMMUNITY</a>
+                </nav>
+                
+                <div class="social-links">
+                    <a href="https://instagram.com/nearweek" target="_blank" class="social-icon" title="Instagram">📷</a>
+                    <a href="https://linkedin.com/company/nearweek" target="_blank" class="social-icon" title="LinkedIn">💼</a>
+                    <a href="https://x.com/nearweek" target="_blank" class="social-icon" title="X (Twitter)">𝕏</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-text">
+                    2025, NEARWEEK. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showHome() {
+            document.getElementById('home-content').classList.remove('hidden');
+            document.getElementById('newsletter-content').classList.remove('active');
+        }
+
+        function showNewsletter() {
+            document.getElementById('home-content').classList.add('hidden');
+            document.getElementById('newsletter-content').classList.add('active');
+            loadNewsletter();
+        }
+
+        async function loadNewsletter() {
+            const container = document.getElementById('newsletter-items');
+            
+            container.innerHTML = `
+                <div class="newsletter-fallback">
+                    <h3>Access NEARWEEK Newsletter</h3>
+                    <p>Read our latest insights on AI x Web3, NEAR ecosystem updates, and industry analysis.</p>
+                    <a href="https://us1.campaign-archive.com/home/?u=ed13caf5cf7d37689d81ef60b&id=86d4e11a12" target="_blank">View Newsletter Archive</a>
+                    <a href="https://nearweek.us1.list-manage.com/subscribe?u=ed13caf5cf7d37689d81ef60b&id=86d4e11a12" target="_blank">Subscribe</a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
