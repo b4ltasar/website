@@ -3,300 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEARWEEK - The End is Near</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital,wght@0,400&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'inter': ['Inter', '-apple-system', 'Roboto', 'Helvetica', 'sans-serif'],
-                        'fragment-mono': ['Fragment Mono', '-apple-system', 'Roboto', 'Helvetica', 'sans-serif'],
-                    }
-                }
-            }
+    <title>NEARWEEK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    </script>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .top-nav a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: black;
+        }
+        
+        /* Hero Section with Video */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        
+        .hero-content {
+            position: relative;
+            text-align: center;
+            color: white;
+            z-index: 3;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        
+        /* Main Content Section */
+        .main-content {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .text-content {
+            flex: 1;
+            min-width: 400px;
+        }
+        
+        .text-content h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+        
+        .text-content p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .side-image {
+            width: 300px;
+            height: 400px;
+            background: #ddd;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        
+        /* Cards Section */
+        .cards-section {
+            padding: 40px 20px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Background Video Section */
+        .background-video-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .background-video-section video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+        
+        .overlay-content {
+            position: relative;
+            text-align: center;
+            color: white;
+            z-index: 3;
+            padding: 60px;
+            max-width: 800px;
+        }
+        
+        .overlay-content h2 {
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 2rem;
+        }
+        
+        .overlay-content p {
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .main-content { flex-direction: column; text-align: center; }
+            .text-content { min-width: auto; }
+            .text-content h2 { font-size: 2rem; }
+            .side-image { width: 100%; max-width: 300px; margin: 0 auto; }
+            .overlay-content h2 { font-size: 2.5rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <div class="min-h-screen bg-white font-inter">
-        <!-- Header -->
-        <header class="flex h-[140px] px-4 md:px-16 justify-between items-center">
-            <div class="flex justify-center items-center">
-                <svg 
-                    width="209" 
-                    height="29" 
-                    viewBox="0 0 209 29" 
-                    fill="none" 
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-7"
-                >
-                    <path d="M24.0194 0V28.2893H17.7299L7.69922 13.4264H7.53656V28.2893H0V0H6.39794L16.2659 14.8077H16.4828V0H24.0194Z" fill="black"/>
-                    <path d="M25.0156 28.2893V0H45.0227V6.18829H32.5522V11.0505H43.9926V17.2388H32.5522V22.1011H44.9685V28.2893H25.0156Z" fill="black"/>
-                    <path d="M54.1564 28.2893H46.0234L55.1866 0H65.4883L74.6515 28.2893H66.5185L60.4459 7.79062H60.229L54.1564 28.2893ZM52.6383 17.1283H67.9282V22.8746H52.6383V17.1283Z" fill="black"/>
-                    <path d="M75.6562 28.2893V0H87.6388C89.6992 0 91.502 0.382164 93.0473 1.14649C94.5925 1.91082 95.7944 3.01127 96.6529 4.44784C97.5114 5.8844 97.9406 7.60644 97.9406 9.61396C97.9406 11.6399 97.4978 13.3481 96.6122 14.7386C95.7357 16.1292 94.5022 17.179 92.9117 17.888C91.3303 18.5971 89.4823 18.9517 87.3677 18.9517H80.2107V12.9844H85.8496C86.7352 12.9844 87.4897 12.8739 88.1133 12.6529C88.7458 12.4226 89.2293 12.0589 89.5636 11.5616C89.907 11.0643 90.0787 10.4151 90.0787 9.61396C90.0787 8.80359 89.907 8.14516 89.5636 7.63868C89.2293 7.12298 88.7458 6.74542 88.1133 6.506C87.4897 6.25736 86.7352 6.13304 85.8496 6.13304H83.1928V28.2893H75.6562ZM91.9222 15.305L98.8623 28.2893H90.6751L83.8977 15.305H91.9222Z" fill="black"/>
-                    <path d="M108.047 28.2893L99.8594 0H108.263L112.059 17.4046H112.276L116.776 0H123.391L127.891 17.4598H128.108L131.903 0H140.307L132.12 28.2893H124.909L120.192 12.4871H119.975L115.258 28.2893H108.047Z" fill="black"/>
-                    <path d="M141.312 28.2893V0H161.32V6.18829H148.849V11.0505H160.289V17.2388H148.849V22.1011H161.265V28.2893H141.312Z" fill="black"/>
-                    <path d="M162.312 28.2893V0H182.32V6.18829H169.849V11.0505H181.289V17.2388H169.849V22.1011H182.265V28.2893H162.312Z" fill="black"/>
-                    <path d="M183.32 28.2893V0H190.857V11.4373H191.236L199.586 0H208.37L198.99 12.5976L208.587 28.2893H199.586L193.351 17.6808L190.857 20.996V28.2893H183.32Z" fill="black"/>
-                </svg>
-            </div>
-            
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center gap-8">
-                <a href="#newsletter" class="text-black text-center font-inter text-base font-normal leading-[145%] tracking-[-0.08px]">
-                    NEWSLETTER
-                </a>
-                <a href="#blog" class="text-black text-center font-inter text-base font-normal leading-[145%] tracking-[-0.08px]">
-                    BLOG
-                </a>
-                <a href="#community" class="text-black text-center font-inter text-base font-normal leading-[145%] tracking-[-0.08px]">
-                    COMMUNITY
-                </a>
-            </nav>
+    <!-- Top Navigation -->
+    <div class="logo">NEARWEEK</div>
+    <nav class="top-nav">
+        <a href="#newsletter">NEWSLETTER</a>
+        <a href="#blog">BLOG</a>
+        <a href="#community">COMMUNITY</a>
+    </nav>
 
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden flex flex-col gap-1.5 w-5">
-                <div class="w-5 h-0.5 bg-black"></div>
-                <div class="w-5 h-0.5 bg-black"></div>
-                <div class="w-5 h-0.5 bg-black"></div>
-            </button>
-        </header>
+    <!-- Hero Section with Video -->
+    <section class="hero">
+        <video autoplay loop muted playsinline>
+            <source src="webpage loop small.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>NEARWEEK</h1>
+            <p>EXPLORING WHERE AI MEETS CRYPTO</p>
+        </div>
+    </section>
 
-        <!-- Hero Section -->
-        <section class="flex flex-col lg:flex-row h-auto lg:h-[314px] px-4 md:px-16 justify-center items-center gap-8 lg:gap-16">
-            <div class="flex flex-col justify-end items-start gap-8 flex-1 max-w-lg">
-                <div class="flex flex-col justify-center items-start gap-6 w-full">
-                    <h1 class="w-full text-black font-inter text-2xl font-bold leading-[110%] tracking-[-0.48px]">
-                        THE END IS NEAR
-                    </h1>
-                    <p class="max-w-[509px] text-black/55 font-inter text-xs font-normal leading-[145%] tracking-[-0.06px]">
-                        NEARWEEK deliver curated news, insightful analysis, and real-time updates on the builders, projects, and innovations shaping the future of AI x Web3.
-                        <br><br>
-                        Our mission is to connect the global NEAR community with trusted information, enabling everyone to understand, participate in, and help build the open web.
-                        <br><br>
-                        Stay informed. Stay early. Stay NEAR.
-                    </p>
+    <!-- Main Content Section -->
+    <section class="main-content">
+        <div class="text-content">
+            <h2>THE END IS NEAR</h2>
+            <p>NEARWEEK deliver curated news, insightful analysis, and real-time updates on the builders, projects, and innovations shaping the future of AI x Web3.</p>
+            <p>Our mission is to connect the global NEAR community with trusted information, enabling everyone to understand, participate in, and help build the open web.</p>
+            <p>Stay informed. Stay early. Stay NEAR.</p>
+        </div>
+        <div class="side-image">
+            <img src="magazinepic.png" alt="NEARWEEK Magazine" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-image">
+                    <div style="background: #333; color: white; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold;">NEWSLETTER</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">READ THE LATEST NEWSLETTER</div>
                 </div>
             </div>
             
-            <div class="flex flex-col justify-center items-center flex-1 max-w-lg">
-                <div class="w-full max-w-[330px] h-[222px] bg-black rounded-2xl flex justify-center items-center">
-                    <div class="w-full h-full bg-gray-200 rounded-2xl"></div>
+            <div class="card">
+                <div class="card-image">
+                    <div style="background: #333; color: white; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold;">AI SUPERCHAIN</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">THE AI SUPERCHAIN</div>
+                    <div class="card-subtitle">BY PETER HAARMAN, FOUNDER NEARWEEK</div>
                 </div>
             </div>
-        </section>
-
-        <!-- Marquee Section -->
-        <section class="flex flex-wrap justify-center items-center gap-5 px-4 py-8 overflow-x-auto">
-            <div class="flex gap-5 min-w-max">
-                <!-- Card 1 - Black -->
-                <div class="w-[399px] h-[375px] rounded-[10px] border border-black bg-black flex-shrink-0"></div>
-                
-                <!-- Card 2 - Newsletter -->
-                <div class="w-[399px] h-[375px] rounded-[10px] border border-black bg-white/29 relative flex-shrink-0">
-                    <div class="absolute left-8 top-28">
-                        <div class="w-[169px] text-black font-fragment-mono text-sm font-normal leading-[120%] tracking-[-0.28px]">
-                            READ THE LATEST NEWSLETTER
-                        </div>
-                        <svg 
-                            class="w-12 h-11 mt-4"
-                            viewBox="0 0 48 45" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path d="M14 12.5H34V32.5" stroke="black" stroke-width="2" stroke-linecap="square"/>
-                            <path d="M14 31.875L33.375 13.7109" stroke="black" stroke-width="2" stroke-linecap="square"/>
-                        </svg>
-                    </div>
-                    <img 
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/317640cc5c6fa6c70b9aa386281d75d5fe379f33?width=574" 
-                        alt="Newsletter preview" 
-                        class="w-[574px] h-[459px] absolute -left-0.5 -top-3"
-                    >
-                    <div class="absolute left-32 top-44 text-black font-fragment-mono text-sm font-normal leading-[120%] tracking-[-0.28px]">
-                        TEXT IS WRITTEN HERE
-                    </div>
+            
+            <div class="card">
+                <div class="card-image">
+                    <div style="background: #333; color: white; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold;">SOVEREIGNTY</div>
                 </div>
-                
-                <!-- Card 3 - AI Superchain -->
-                <div class="w-[399px] h-[375px] rounded-[10px] border border-black bg-black relative flex-shrink-0">
-                    <img 
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/d8b5c7453f55cd9f722627a3188a571398345195?width=345" 
-                        alt="Dragon illustration" 
-                        class="w-[345px] h-[405px] absolute left-[76px] top-4"
-                    >
-                    <div class="absolute left-8 top-44 text-white font-bold text-xl leading-[120%]">
-                        THE AI<br>SUPER<br>CHAIN
-                    </div>
-                    <div class="absolute left-8 top-[315px] text-white font-fragment-mono text-xs leading-[120%] tracking-[-0.28px]">
-                        BY PETER HUMAIDAN, FOUNDER NEARWEEK
-                    </div>
-                </div>
-                
-                <!-- Card 4 - Sovereignty -->
-                <div class="w-[399px] h-[375px] rounded-[10px] border border-black bg-black relative flex-shrink-0">
-                    <img 
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/277ed748bca42e7a1230526f16209e8c77b37880?width=457" 
-                        alt="Article preview" 
-                        class="w-[457px] h-[201px] absolute -left-7 top-[87px]"
-                    >
-                    <div class="absolute left-[90px] top-[302px] text-[#4DFF00] font-fragment-mono text-sm font-normal leading-[120%] tracking-[-0.28px]">
-                        [RECLAIM YOUR SOVEREIGNTY]
-                    </div>
-                </div>
-                
-                <!-- Card 5 - T-Shirt -->
-                <div class="w-[399px] h-[375px] rounded-[10px] border border-black bg-black relative flex-shrink-0">
-                    <div class="absolute left-[68px] top-8 text-white font-fragment-mono text-sm font-normal leading-[120%] tracking-[-0.28px]">
-                        T-SHIRT
-                    </div>
-                    <div class="absolute left-[172px] top-8 text-white/60 font-fragment-mono text-sm font-normal leading-[120%] tracking-[-0.28px]">
-                        TEN AI COMMANDMENTS
-                    </div>
-                    <img 
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/ad33659c33381eac40061641b81f19d65a13ad9f?width=329" 
-                        alt="T-shirt design" 
-                        class="w-[329px] h-[308px] absolute left-9 top-11"
-                    >
-                    <div class="absolute left-[153px] top-[329px] text-white/60 font-fragment-mono text-sm font-normal leading-[120%] tracking-[-0.28px]">
-                        COMING SOON
-                    </div>
+                <div class="card-content">
+                    <div class="card-title">[RECLAIM YOUR SOVEREIGNTY]</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Hero Image -->
-        <section class="w-full">
-            <img 
-                src="https://api.builder.io/api/v1/image/assets/TEMP/c3d147213f2e852c92070022c62b2eb9a2e329e3?width=1280" 
-                alt="Hero banner" 
-                class="w-full h-auto max-h-[520px] object-cover"
-            >
-        </section>
+    <!-- Background Video Section -->
+    <section class="background-video-section">
+        <video autoplay loop muted playsinline>
+            <source src="webpageloop2.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="overlay-content">
+            <h2>DATA IS POWER.</h2>
+            <p>BUILD THE FUTURE YOU WANT TO PASS</p>
+            <p>TO FUTURE GENERATIONS.</p>
+        </div>
+    </section>
 
-        <!-- Data is Power Section -->
-        <section class="flex flex-col justify-center items-center gap-4 px-4 py-16 text-center">
-            <div class="max-w-4xl">
-                <h2 class="text-black font-inter text-4xl md:text-6xl font-bold leading-[185%] tracking-[-0.4px] mb-4">
-                    DATA IS POWER.
-                </h2>
-                <p class="text-black font-inter text-lg md:text-xl font-normal leading-[185%] tracking-[-0.4px]">
-                    BUILD THE FUTURE YOU WANT TO PASS TO FUTURE GENERATIONS.
-                </p>
-            </div>
-        </section>
-
-        <!-- Newsletter Signup -->
-        <section class="flex justify-center items-center px-4 py-8">
-            <div class="w-full max-w-[1200px] border border-black bg-white relative">
-                <div class="flex items-center justify-between p-8 md:p-16">
-                    <h3 class="flex-1 text-black text-center font-inter text-2xl md:text-4xl font-bold leading-[110%] tracking-[-0.72px] uppercase">
-                        Sign Up for THE OFFICIAL NEAR Newsletter
-                    </h3>
-                    <svg 
-                        class="w-16 h-16 md:w-20 md:h-20 flex-shrink-0"
-                        viewBox="0 0 48 45" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M14 12.5H34V32.5" stroke="black" stroke-width="2" stroke-linecap="square"/>
-                        <path d="M14 31.875L33.375 13.7109" stroke="black" stroke-width="2" stroke-linecap="square"/>
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-        <!-- In the Trenches -->
-        <section class="flex justify-center items-center px-4 py-16">
-            <h4 class="text-black text-center font-inter text-xl md:text-2xl font-normal leading-[120%] tracking-[-1.04px] uppercase">
-                IN THE TRENCHES SINCE 2021
-            </h4>
-        </section>
-
-        <!-- Footer -->
-        <footer class="border-t border-black/10 px-4 md:px-16 py-16">
-            <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-16">
-                <div class="flex flex-col gap-8">
-                    <svg 
-                        width="209" 
-                        height="29" 
-                        viewBox="0 0 209 29" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-7"
-                    >
-                        <path d="M24.0194 0V28.2893H17.7299L7.69922 13.4264H7.53656V28.2893H0V0H6.39794L16.2659 14.8077H16.4828V0H24.0194Z" fill="black"/>
-                        <path d="M25.0156 28.2893V0H45.0227V6.18829H32.5522V11.0505H43.9926V17.2388H32.5522V22.1011H44.9685V28.2893H25.0156Z" fill="black"/>
-                        <path d="M54.1564 28.2893H46.0234L55.1866 0H65.4883L74.6515 28.2893H66.5185L60.4459 7.79062H60.229L54.1564 28.2893ZM52.6383 17.1283H67.9282V22.8746H52.6383V17.1283Z" fill="black"/>
-                        <path d="M75.6562 28.2893V0H87.6388C89.6992 0 91.502 0.382164 93.0473 1.14649C94.5925 1.91082 95.7944 3.01127 96.6529 4.44784C97.5114 5.8844 97.9406 7.60644 97.9406 9.61396C97.9406 11.6399 97.4978 13.3481 96.6122 14.7386C95.7357 16.1292 94.5022 17.179 92.9117 17.888C91.3303 18.5971 89.4823 18.9517 87.3677 18.9517H80.2107V12.9844H85.8496C86.7352 12.9844 87.4897 12.8739 88.1133 12.6529C88.7458 12.4226 89.2293 12.0589 89.5636 11.5616C89.907 11.0643 90.0787 10.4151 90.0787 9.61396C90.0787 8.80359 89.907 8.14516 89.5636 7.63868C89.2293 7.12298 88.7458 6.74542 88.1133 6.506C87.4897 6.25736 86.7352 6.13304 85.8496 6.13304H83.1928V28.2893H75.6562ZM91.9222 15.305L98.8623 28.2893H90.6751L83.8977 15.305H91.9222Z" fill="black"/>
-                        <path d="M108.047 28.2893L99.8594 0H108.263L112.059 17.4046H112.276L116.776 0H123.391L127.891 17.4598H128.108L131.903 0H140.307L132.12 28.2893H124.909L120.192 12.4871H119.975L115.258 28.2893H108.047Z" fill="black"/>
-                        <path d="M141.312 28.2893V0H161.32V6.18829H148.849V11.0505H160.289V17.2388H148.849V22.1011H161.265V28.2893H141.312Z" fill="black"/>
-                        <path d="M162.312 28.2893V0H182.32V6.18829H169.849V11.0505H181.289V17.2388H169.849V22.1011H182.265V28.2893H162.312Z" fill="black"/>
-                        <path d="M183.32 28.2893V0H190.857V11.4373H191.236L199.586 0H208.37L198.99 12.5976L208.587 28.2893H199.586L193.351 17.6808L190.857 20.996V28.2893H183.32Z" fill="black"/>
-                    </svg>
-                    <div class="flex flex-col gap-2">
-                        <p class="text-black/55 font-inter text-sm font-normal leading-[145%] tracking-[-0.075px]">
-                            EXPLORING WHERE AI MEETS CRYPTO
-                        </p>
-                        <p class="text-black/55 font-inter text-sm font-normal leading-[145%] tracking-[-0.075px]">
-                            2025, NEARWEEK. All rights reserved.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
-                    <nav class="flex flex-col md:flex-row gap-4 md:gap-8">
-                        <a href="#newsletter" class="text-black font-inter text-base font-normal leading-[145%] tracking-[-0.08px]">
-                            NEWSLETTER
-                        </a>
-                        <a href="#blog" class="text-black font-inter text-base font-normal leading-[145%] tracking-[-0.08px]">
-                            BLOG
-                        </a>
-                        <a href="#community" class="text-black font-inter text-base font-normal leading-[145%] tracking-[-0.08px]">
-                            COMMUNITY
-                        </a>
-                    </nav>
-                    
-                    <div class="flex items-center gap-6">
-                        <a href="#" aria-label="Instagram">
-                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_4694_561)">
-                                    <path d="M12 2.663C15.204 2.663 15.584 2.675 16.85 2.733C20.102 2.881 21.621 4.424 21.769 7.652C21.827 8.917 21.838 9.297 21.838 12.501C21.838 15.706 21.826 16.085 21.769 17.35C21.62 20.575 20.105 22.121 16.85 22.269C15.584 22.327 15.206 22.339 12 22.339C8.796 22.339 8.416 22.327 7.151 22.269C3.891 22.12 2.38 20.57 2.232 17.349C2.174 16.084 2.162 15.705 2.162 12.5C2.162 9.296 2.175 8.917 2.232 7.651C2.381 4.424 3.896 2.88 7.151 2.732C8.417 2.675 8.796 2.663 12 2.663ZM12 0.5C8.741 0.5 8.333 0.514 7.053 0.572C2.695 0.772 0.273 3.19 0.073 7.552C0.014 8.833 0 9.241 0 12.5C0 15.759 0.014 16.168 0.072 17.448C0.272 21.806 2.69 24.228 7.052 24.428C8.333 24.486 8.741 24.5 12 24.5C15.259 24.5 15.668 24.486 16.948 24.428C21.302 24.228 23.73 21.81 23.927 17.448C23.986 16.168 24 15.759 24 12.5C24 9.241 23.986 8.833 23.928 7.553C23.732 3.199 21.311 0.773 16.949 0.573C15.668 0.514 15.259 0.5 12 0.5ZM12 6.338C8.597 6.338 5.838 9.097 5.838 12.5C5.838 15.903 8.597 18.663 12 18.663C15.403 18.663 18.162 15.904 18.162 12.5C18.162 9.097 15.403 6.338 12 6.338ZM12 16.5C9.791 16.5 8 14.71 8 12.5C8 10.291 9.791 8.5 12 8.5C14.209 8.5 16 10.291 16 12.5C16 14.71 14.209 16.5 12 16.5ZM18.406 4.655C17.61 4.655 16.965 5.3 16.965 6.095C16.965 6.89 17.61 7.535 18.406 7.535C19.201 7.535 19.845 6.89 19.845 6.095C19.845 5.3 19.201 4.655 18.406 4.655Z" fill="black"/>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_4694_561">
-                                        <rect width="24" height="24" fill="white" transform="translate(0 0.5)"/>
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </a>
-                        <a href="#" aria-label="LinkedIn">
-                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_4694_563)">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M24 3.5C24 1.84423 22.6558 0.5 21 0.5H3C1.34423 0.5 0 1.84423 0 3.5V21.5C0 23.1558 1.34423 24.5 3 24.5H21C22.6558 24.5 24 23.1558 24 21.5V3.5Z" fill="black"/>
-                                    <path d="M6.88157 8.87402H2.86157V20.966H6.88157V8.87402Z" fill="white"/>
-                                    <path d="M4.899 3.04395C3.52364 3.04395 2.625 3.94816 2.625 5.1333C2.625 6.29355 3.49631 7.22271 4.8458 7.22271H4.87177C6.27347 7.22271 7.14595 6.29355 7.14595 5.1333C7.11994 3.94816 6.27356 3.04395 4.899 3.04395Z" fill="white"/>
-                                    <path d="M16.7475 8.58984C14.6151 8.58984 13.66 9.76252 13.1252 10.5862V8.87419H9.1062C9.1595 10.0084 9.1062 20.9661 9.1062 20.9661H13.1251V14.2131C13.1251 13.8517 13.1511 13.4903 13.2576 13.232C13.5477 12.5101 14.2094 11.7623 15.3198 11.7623C16.7735 11.7623 17.3559 12.8716 17.3559 14.4964V20.9661H21.375V14.0319C21.375 10.3177 19.3919 8.58984 16.7475 8.58984Z" fill="white"/>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_4694_563">
-                                        <rect width="24" height="24" fill="white" transform="translate(0 0.5)"/>
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </a>
-                        <a href="#" aria-label="Twitter">
-                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.9 1.65234H22.582L14.54 10.8413L24 23.3473H16.595L10.791 15.7643L4.157 23.3473H0.469L9.069 13.5163L0 1.65234H7.593L12.834 8.58334L18.9 1.65234ZM17.607 21.1463H19.646L6.482 3.73834H4.292L17.607 21.1463Z" fill="black"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+    <!-- Floating hands image -->
+    <div style="position: fixed; bottom: 50px; right: 50px; z-index: 100; opacity: 0.8;">
+        <img src="hands.png" alt="Hands" style="width: 200px; height: auto;">
     </div>
 </body>
 </html>
