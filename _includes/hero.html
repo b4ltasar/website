@@ -1,0 +1,10 @@
+<section class="hero">
+  <video autoplay loop muted playsinline poster="{{ site.data.hero.poster | relative_url }}">
+    <source src="{{ site.data.hero.video | relative_url }}" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>{{ site.data.hero.title }}</h1>
+    <p>{{ site.data.hero.subtitle }}</p>
+  </div>
+</section>
