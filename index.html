@@ -3,57 +3,40 @@ layout: default
 title: NEARWEEK
 ---
 
-<!-- HERO (text + media from _data/hero.yml) -->
+<!-- HERO (tekst + video) -->
 <section class="container hero-grid">
-  <div class="stack intro">
+  <div class="stack">
     <h1 class="h1">{{ site.data.hero.title }}</h1>
-    {% if site.data.hero.subtitle %}
-      <p class="lead">{{ site.data.hero.subtitle }}</p>
-    {% endif %}
-    {% if site.data.hero.paragraphs %}
-      {% for p in site.data.hero.paragraphs %}
-        <p class="lead">{{ p }}</p>
-      {% endfor %}
-    {% endif %}
+    <p class="lead">{{ site.data.hero.lead1 }}</p>
+    <p class="lead">{{ site.data.hero.lead2 }}</p>
+    <p class="lead">{{ site.data.hero.lead3 }}</p>
   </div>
 
   <div class="hero-card">
-    {% if site.data.hero.video %}
-      <video autoplay loop muted playsinline>
-        <source src="{{ site.data.hero.video | relative_url }}" type="video/mp4">
-      </video>
-    {% elsif site.data.hero.image %}
-      <img src="{{ site.data.hero.image | relative_url }}" alt="Hero image">
-    {% endif %}
+    <video autoplay muted playsinline loop>
+      <source src="{{ site.data.hero.video | relative_url }}" type="video/mp4">
+    </video>
   </div>
 </section>
 
-<!-- MARQUEE: cards (infinite row you can pause/drag with JS) -->
+<!-- CARDS MARQUEE (den ENESTE cards-sektion) -->
 <section class="section">
   {% include cards-marquee.html %}
 </section>
 
-<!-- CARDS GRID (regular, change data in _data/cards.yml) -->
-<section id="blog" class="container section cards-row">
-  {% include cards.html %}
+<!-- STORT VISUELT (valgfrit; fjern hvis du ikke vil bruge det) -->
+{% if site.data.hero.giant_image %}
+<section class="container section">
+  <img src="{{ site.data.hero.giant_image | relative_url }}" alt="" class="giant-visual">
 </section>
-
-<!-- BIG VISUAL / VIDEO UNDER “DATA IS POWER” -->
-<section class="section">
-  {% if site.data.hero.big_visual_video %}
-    <video autoplay loop muted playsinline class="hero-card" style="aspect-ratio:16/9;width:100%;border-radius:14px;">
-      <source src="{{ site.data.hero.big_visual_video | relative_url }}" type="video/mp4">
-    </video>
-  {% elsif site.data.hero.big_visual_image %}
-    <img src="{{ site.data.hero.big_visual_image | relative_url }}" alt="" class="hero-card" style="aspect-ratio:16/9;width:100%;border-radius:14px;">
-  {% endif %}
-</section>
+{% endif %}
 
 <!-- CTA -->
 <section id="newsletter" class="container cta">
   <h2 class="big">{{ site.data.footer.cta_title }}</h2>
   <p class="sub">{{ site.data.footer.cta_sub }}</p>
-  <a class="cta-button" href="{{ site.data.footer.cta_link | relative_url }}" target="_blank" rel="noopener">
+  <a class="cta-button" href="{{ site.data.footer.cta_link }}" target="_blank" rel="noopener">
     {{ site.data.footer.cta_label }}
   </a>
+  <p class="since">IN THE TRENCHES SINCE 2021</p>
 </section>
