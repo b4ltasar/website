@@ -1,0 +1,9 @@
+- title: "AI Superchain"
+  description: "Læs om AI og NEAR"
+  image: "/images/ai-superchain-card.jpg"
+  link: "https://nearweek.com/ai"
+  position: "50% 50%"     # valgfri crop-ankre
+- title: "Reclaim Sovereignty"
+  description: "Et call-to-action"
+  image: "/images/sovereignty-card.jpg"
+  link: "https://nearweek.com/sovereignty"
