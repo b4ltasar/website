@@ -3,7 +3,3 @@ header:
   - { text: "NEWSLETTER", href: "/#newsletter" }
   - { text: "BLOG",        href: "/#blog" }
   - { text: "COMMUNITY",   href: "/#community" }
-footer:
-  - { text: "NEWSLETTER", href: "/#newsletter" }
-  - { text: "BLOG",       href: "/#blog" }
-  - { text: "COMMUNITY",  href: "/#community" }
