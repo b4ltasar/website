@@ -1,0 +1,10 @@
+brand_logo: "/images/_logo_horizontal_white.png"
+links:
+  - label: "NEWSLETTER"
+    href: "#newsletter"
+  - label: "BLOG"
+    href: "#blog"
+  - label: "COMMUNITY"
+    href: "#community"
+copyright: "2025, NEARWEEK. All rights reserved."
+since: "IN THE TRENCHES SINCE 2021"
