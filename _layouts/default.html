@@ -46,7 +46,7 @@
     <link rel="icon" type="image/x-icon" href="{{ '/images/favicon.ico' | relative_url }}">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/styles.css?v=' | append: site.time | relative_url }}">
     
     <!-- Meta tags for social media -->
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
