@@ -6,15 +6,17 @@ title: NEARWEEK
 <header class="container header">
   <a href="{{ '/' | relative_url }}" aria-label="NEARWEEK">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="{{ '/images/_logo_horizontal_white.png' | relative_url }}">
-      <img src="{{ '/images/_logo_horizontal_black.png' | relative_url }}" alt="NEARWEEK" class="brand-logo">
+      <!-- Hvidt logo i dark mode -->
+      <source srcset="{{ '/images/_logo_horizontal_white.png' | relative_url }}" media="(prefers-color-scheme: dark)">
+      <!-- Sort logo i light mode -->
+      <img class="brand-logo" src="{{ '/images/_logo_horizontal_black.png' | relative_url }}" alt="NEARWEEK">
     </picture>
   </a>
 
   <nav class="nav">
-    {% for item in site.data.nav %}
-      <a href="{{ item.href }}">{{ item.label }}</a>
-    {% endfor %}
+    <a href="#newsletter">NEWSLETTER</a>
+    <a href="#blog">BLOG</a>
+    <a href="#community">COMMUNITY</a>
   </nav>
 </header>
 
@@ -29,12 +31,11 @@ title: NEARWEEK
     {% endif %}
   </div>
 
-  <div class="hero-card">
-    <video autoplay loop muted playsinline poster="{{ h.poster | relative_url }}">
-      <source src="{{ h.video | relative_url }}" type="video/mp4">
-    </video>
-  </div>
-</section>
+<div class="hero-card">
+  <video autoplay loop muted playsinline>
+    <source src="{{ '/images/webpage_loop_small.mp4' | relative_url }}" type="video/mp4">
+  </video>
+</div>
 
 <!-- MARQUEE: Cards fra _data/cards_marquee.yml -->
 <section class="section" aria-label="Highlights">
