@@ -3,67 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-<style>
-:root{
-  --bg: {{ site.data.theme.light.bg }};
-  --text: {{ site.data.theme.light.text }};
-  --muted: {{ site.data.theme.light.muted }};
-  --card: {{ site.data.theme.light.card }};
-  --border: {{ site.data.theme.light.border }};
-  --accent: {{ site.data.theme.light.accent }};
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg: {{ site.data.theme.dark.bg }};
-    --text: {{ site.data.theme.dark.text }};
-    --muted: {{ site.data.theme.dark.muted }};
-    --card: {{ site.data.theme.dark.card }};
-    --border: {{ site.data.theme.dark.border }};
-    --accent: {{ site.data.theme.dark.accent }};
-  }
-}
-/* Mulighed for at overstyre med toggle (se step 3) */
-:root[data-theme="light"]{
-  --bg: {{ site.data.theme.light.bg }};
-  --text: {{ site.data.theme.light.text }};
-  --muted: {{ site.data.theme.light.muted }};
-  --card: {{ site.data.theme.light.card }};
-  --border: {{ site.data.theme.light.border }};
-  --accent: {{ site.data.theme.light.accent }};
-}
-:root[data-theme="dark"]{
-  --bg: {{ site.data.theme.dark.bg }};
-  --text: {{ site.data.theme.dark.text }};
-  --muted: {{ site.data.theme.dark.muted }};
-  --card: {{ site.data.theme.dark.card }};
-  --border: {{ site.data.theme.dark.border }};
-  --accent: {{ site.data.theme.dark.accent }};
-}
-</style>
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
+    
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ '/images/favicon.ico' | relative_url }}">
-    
-    <!-- CSS -->
-  <link rel="stylesheet" href="{{ '/assets/styles.css?v=' | append: site.time | relative_url }}">
-    
-    <!-- Meta tags for social media -->
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
-    <meta property="og:type" content="website">
-    
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 </head>
 <body>
     {{ content }}
-    
-    <!-- Scripts -->
-    {% if page.newsletter %}
-    <script src="{{ '/assets/newsletter-rss.js' | relative_url }}"></script>
-    {% endif %}
 </body>
 </html>
