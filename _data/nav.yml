@@ -1,0 +1,8 @@
+brand_logo: "/images/_logo_horizontal_black.png"
+links:
+  - label: "NEWSLETTER"
+    href: "#newsletter"
+  - label: "BLOG"
+    href: "#blog"
+  - label: "COMMUNITY"
+    href: "#community"
