@@ -13,22 +13,28 @@ body {
 a { color: inherit; text-decoration: none; }
 img, video { max-width: 100%; display: block; }
 
-/* Layout helpers */
+/* ========== LAYOUT HELPERS ========== */
 .container { width: min(1200px, 92vw); margin-inline: auto; }
 .section { padding: 56px 0; }
 .stack > * + * { margin-top: 12px; }
 .h1 { font-size: clamp(28px, 5vw, 42px); line-height: 1.15; font-weight: 800; }
+.lead { color: var(--muted); }
 
 /* ========== HEADER ========== */
-.header { display:flex; align-items:center; justify-content:space-between; padding: 18px 0; }
-.brand { font-weight: 800; letter-spacing: .02em; }
-.nav { display:flex; gap: 24px; }
-.nav a { opacity:.85; }
-.nav a:hover { opacity:1; }
-.nav a { opacity:.85; transition: transform .15s ease, opacity .15s ease; }
-.nav a:hover { opacity:1; transform: scale(1.2); }
-.footer .nav a:hover { transform: scale(1.2); }
+.header {
+  display:flex; align-items:center; justify-content:space-between; padding: 18px 0;
+}
 .brand-logo { height: 28px; display:block; }
+.nav {
+  display:flex; gap: 24px;
+}
+.nav a {
+  opacity:.85;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.nav a:hover {
+  opacity:1; transform: scale(1.2);
+}
 
 /* ========== HERO GRID ========== */
 .hero-grid {
@@ -51,13 +57,17 @@ img, video { max-width: 100%; display: block; }
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
 }
 
-/* ========== MARQUEE ========== */
+/* Stor visual/video sektion */
+.hero-image { margin: 40px 0; }
+.hero-image video, .hero-image img { width: 100%; border-radius: 14px; }
+
+/* ========== (GAMMEL) TEKST-MARQUEE – fjern hvis ikke brugt ========== */
 .marquee { overflow:hidden; border-block: 1px solid var(--border); background: var(--card); }
 .marquee-content { display:flex; gap:48px; padding:14px 0; animation: marquee 25s linear infinite; white-space:nowrap; }
 .marquee-content span { opacity:.8; }
 @keyframes marquee { from{ transform: translateX(0);} to{ transform: translateX(-50%);} }
 
-/* ===== Cards Marquee (JS-drevet, kan pauses/dragges) ===== */
+/* ========== CARDS-MARQUEE (JS-drevet, pause/drag) ========== */
 .cards-marquee{
   overflow: hidden;
   padding: 8px 0;
@@ -72,7 +82,7 @@ img, video { max-width: 100%; display: block; }
   width: max-content;
   padding: 10px 0;
   will-change: transform;
-  transform: translateX(var(--x, 0px));
+  transform: translateX(var(--x, 0px)); /* styres af JS */
 }
 .mcard{
   flex: 0 0 340px;
@@ -97,7 +107,7 @@ img, video { max-width: 100%; display: block; }
   .cards-track{ transform: none !important; }
 }
 
-/* ========== CARDS ROW ========== */
+/* ========== CARDS GRID ========== */
 .cards-container {
   display:grid;
   grid-template-columns: repeat(3, 1fr);
@@ -123,16 +133,25 @@ img, video { max-width: 100%; display: block; }
 .cta .sub { color: var(--muted); margin: 0 0 28px; }
 .cta-button {
   display:inline-flex; align-items:center; justify-content:center;
-  padding: 18px 28px; border-radius: 999px; background: var(--text); color: var(--bg);
-  border: 1px solid var(--border); font-weight:700; letter-spacing:.02em;
+  padding: 18px 28px; border-radius: 12px; font-weight:700; letter-spacing:.02em;
+  background: var(--text); color: var(--bg); border: 1px solid var(--border);
+  transition: filter .15s ease, background-color .15s ease;
 }
 .cta-button:hover { filter: brightness(1.06); }
+.cta-button--outline { background: transparent; color: var(--text); border: 2px solid var(--text); }
+.cta-button--outline:hover { background: rgba(0,0,0,.04); }
+.cta-arrow { margin-left: 10px; }
 
 /* ========== FOOTER ========== */
-.footer { display:grid; gap:12px; align-items:center; grid-template-columns: 1fr auto auto; padding: 28px 0 56px; border-top:1px solid var(--border); margin-top: 56px; }
-.footer .nav { gap:16px; }
+.footer {
+  display:grid; gap:12px; align-items:center;
+  grid-template-columns: 1fr auto auto;
+  padding: 28px 0 56px; border-top:1px solid var(--border); margin-top: 56px;
+}
+.footer .nav { gap:24px; }                 /* samme luft som header */
+.footer .nav a { transition: transform .15s ease, opacity .15s ease; }
+.footer .nav a:hover { transform: scale(1.2); opacity:1; }
 .footer small { color: var(--muted); grid-column: 1 / -1; }
-.brand-logo--footer { height: 28px; display:block; filter: invert(1); } /* kun hvis footer-logo er sort */
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 900px){
@@ -145,5 +164,5 @@ img, video { max-width: 100%; display: block; }
   .nav { gap: 14px; }
 }
 
-/* ========== OPTIONAL: tydelig debug – fjern når alt spiller ========== */
+/* ========== DEBUG (midlertidig) ========== */
 /* body { outline: 4px solid magenta; } */
