@@ -1,425 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEARWEEK</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Inter, sans-serif;
-            background: #f5f5f5;
-        }
-        
-        /* Header Navigation - Always visible */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-        
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #000;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: #000;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        
-        /* Hero Section - Fixed height */
-        .hero {
-            position: relative;
-            height: 70vh;
-            margin-top: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: #000;
-        }
-        
-        .hero video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 2;
-        }
-        
-        .hero-content {
-            position: relative;
-            text-align: center;
-            color: white;
-            z-index: 3;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.1rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-        
-        /* Main Content Section */
-        .main-content {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: flex-start;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-        
-        .text-content {
-            flex: 1;
-            min-width: 400px;
-        }
-        
-        .text-content h2 {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 2rem;
-        }
-        
-        .text-content p {
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-        
-        .side-image {
-            width: 300px;
-            height: 400px;
-            flex-shrink: 0;
-        }
-        
-        .side-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        /* Cards Section */
-        .cards-section {
-            padding: 40px 20px 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .card-image {
-            width: 100%;
-            height: 200px;
-            background: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .card-content {
-            padding: 20px;
-        }
-        
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        
-        .card-subtitle {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        /* Footer Video Section */
-        .footer-video-section {
-            position: relative;
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: #000;
-        }
-        
-        .footer-video-section video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-        
-        .footer-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 2;
-        }
-        
-        .footer-content {
-            position: relative;
-            text-align: center;
-            color: white;
-            z-index: 3;
-            padding: 60px;
-            max-width: 800px;
-        }
-        
-        .footer-content h2 {
-            font-size: 4rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            margin-bottom: 2rem;
-        }
-        
-        .footer-content p {
-            font-size: 1.3rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            margin-bottom: 1rem;
-        }
-        
-        /* Floating hands image */
-        .floating-hands {
-            position: fixed;
-            bottom: 50px;
-            right: 50px;
-            z-index: 999;
-            opacity: 0.9;
-            transition: transform 0.3s ease;
-        }
-        
-        .floating-hands:hover {
-            transform: scale(1.1);
-        }
-        
-        .floating-hands img {
-            width: 150px;
-            height: auto;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-                padding: 10px;
-            }
-            
-            .nav-links {
-                gap: 20px;
-            }
-            
-            .hero {
-                height: 60vh;
-                margin-top: 80px;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .main-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .text-content {
-                min-width: auto;
-            }
-            
-            .text-content h2 {
-                font-size: 2rem;
-            }
-            
-            .side-image {
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-            
-            .footer-content h2 {
-                font-size: 2.5rem;
-            }
-            
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .floating-hands {
-                bottom: 20px;
-                right: 20px;
-            }
-            
-            .floating-hands img {
-                width: 100px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header Navigation -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">NEARWEEK</div>
-            <nav class="nav-links">
-                <a href="#newsletter">NEWSLETTER</a>
-                <a href="#blog">BLOG</a>
-                <a href="#community">COMMUNITY</a>
-            </nav>
-        </div>
-    </header>
+---
+layout: default
+title: NEARWEEK
+---
 
-    <!-- Hero Section with Video -->
-    <section class="hero">
-        <video autoplay loop muted playsinline>
-            <source src="webpage loop small.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>NEARWEEK</h1>
-            <p>EXPLORING WHERE AI MEETS CRYPTO</p>
-        </div>
-    </section>
+<header class="container header">
+  <div class="brand">NEARWEEK</div>
+  <nav class="nav">
+    <a href="#newsletter">NEWSLETTER</a>
+    <a href="#blog">BLOG</a>
+    <a href="#community">COMMUNITY</a>
+    {%- comment -%} Valgfri: {% include theme-toggle.html %} {%- endcomment -%}
+  </nav>
+</header>
 
-    <!-- Main Content Section -->
-    <section class="main-content">
-        <div class="text-content">
-            <h2>THE END IS NEAR</h2>
-            <p>NEARWEEK deliver curated news, insightful analysis, and real-time updates on the builders, projects, and innovations shaping the future of AI x Web3.</p>
-            <p>Our mission is to connect the global NEAR community with trusted information, enabling everyone to understand, participate in, and help build the open web.</p>
-            <p>Stay informed. Stay early. Stay NEAR.</p>
-        </div>
-        <div class="side-image">
-            <img src="magazinepic.png" alt="NEARWEEK Magazine">
-        </div>
-    </section>
+<!-- Hero: tekst + video-kort (passer til .hero-grid/.hero-card i din CSS) -->
+<section class="container hero-grid">
+  <div class="intro stack">
+    <h1 class="h1">THE END IS NEAR</h1>
+    <p class="lead">NEARWEEK deliver curated news, insightful analysis, and real-time updates on the builders, projects, and innovations shaping the future of AI x Web3.</p>
+    <p class="lead">Our mission is to connect the global NEAR community with trusted information, enabling everyone to understand, participate in, and help build the open web.</p>
+    <p class="lead">Stay informed. Stay early. Stay NEAR.</p>
+  </div>
 
-    <!-- Cards Section -->
-    <section class="cards-section">
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-image">NEWSLETTER</div>
-                <div class="card-content">
-                    <div class="card-title">READ THE LATEST NEWSLETTER</div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-image">AI SUPERCHAIN</div>
-                <div class="card-content">
-                    <div class="card-title">THE AI SUPERCHAIN</div>
-                    <div class="card-subtitle">BY PETER HAARMAN, FOUNDER NEARWEEK</div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-image">SOVEREIGNTY</div>
-                <div class="card-content">
-                    <div class="card-title">[RECLAIM YOUR SOVEREIGNTY]</div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="hero-card">
+    <video autoplay loop muted playsinline>
+      <source src="/images/webpage_loop_small.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
 
-    <!-- Footer Video Section -->
-    <section class="footer-video-section">
-        <video autoplay loop muted playsinline>
-            <source src="webpageloop2.mp4" type="video/mp4">
-        </video>
-  <div class="text-content">
-            <h2>THE END IS NEAR</h2>
-            <p><h2>DATA IS POWER.</h2>
-            <p>BUILD THE FUTURE YOU WANT TO PASS</p>
-            <p>TO FUTURE GENERATIONS.</p>
-        </div>
-        <div class="side-image">
-            <img src="magazinepic.png" alt="NEARWEEK Magazine">
-        </div>
-    </section>
+<!-- Marquee (kan også være include) -->
+<section class="section">
+  {% include marquee.html %}
+</section>
 
-        <div class="footer-overlay"></div>
-        <div class="footer-content">
-            
-    </section>
+<!-- Cards (hentes fra _data/cards.yml via _includes/cards.html) -->
+<section id="blog" class="container section cards-row">
+  {% include cards.html %}
+</section>
 
-    </div>
-</body>
-</html>
+<!-- Giant visual (det store billede midt på siden) -->
+<section class="hero-image">
+  <img src="/images/giant-visual.jpg" alt="">
+</section>
+
+<!-- CTA / Newsletter -->
+<section id="newsletter" class="container cta">
+  <h2 class="big">DATA IS POWER.</h2>
+  <p class="sub">BUILD THE FUTURE YOU WANT TO PASS TO FUTURE GENERATIONS.</p>
+  <a class="cta-button" href="https://nearweek.com/newsletter" target="_blank" rel="noopener">
+    SIGN UP FOR THE OFFICIAL NEAR NEWSLETTER <span aria-hidden>↗</span>
+  </a>
+  <p class="since">IN THE TRENCHES SINCE 2021</p>
+</section>
+
+<footer class="container footer">
+  <div class="logo">NEARWEEK</div>
+  <nav class="nav"><a>NEWSLETTER</a><a>BLOG</a><a>COMMUNITY</a></nav>
+  <div class="socials">◎ ◎ ◎</div>
+  <small>2025, NEARWEEK. All rights reserved.</small>
+</footer>
