@@ -53,6 +53,50 @@ img, video { max-width: 100%; display: block; }
 .marquee-content span { opacity:.8; }
 @keyframes marquee { from{ transform: translateX(0);} to{ transform: translateX(-50%);} }
 
+/* ===== Cards Marquee (uendelig rul) ===== */
+.cards-marquee{
+  overflow: hidden;
+  padding: 8px 0;
+  border-block: 1px solid var(--border);
+  background: var(--card);
+}
+.cards-track{
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  padding: 10px 0;
+  animation: cards-marquee 40s linear infinite;
+}
+@keyframes cards-marquee{
+  from{ transform: translateX(0); }
+  to  { transform: translateX(-50%); } /* fordi vi duplikerer indholdet én gang */
+}
+.mcard{
+  flex: 0 0 340px;                /* kortbredde */
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,.06);
+}
+.mcard-media{
+  display:block; position:relative; aspect-ratio: 16/9; overflow:hidden; background:#111;
+}
+.mcard-media img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position: var(--pos, 50% 50%);
+  transform: scale(1.02);
+}
+.mcard-body{ padding: 12px 14px 14px; }
+.mcard-title{ font-weight:700; font-size: 16px; margin: 2px 0 4px; }
+.mcard-text{ color: var(--muted); font-size: 14px; }
+
+/* Brugeren har valgt reduceret bevægelse */
+@media (prefers-reduced-motion: reduce){
+  .cards-track{ animation: none; }
+  .cards-marquee{ overflow: auto; }
+}
+
 /* ========== CARDS ROW ========== */
 .cards-container {
   display:grid;
