@@ -1,8 +1,11 @@
-brand_logo: "/images/_logo_horizontal_black.png"
-links:
-  - label: "NEWSLETTER"
-    href: "#newsletter"
-  - label: "BLOG"
-    href: "#blog"
-  - label: "COMMUNITY"
-    href: "#community"
+logo_header: "/images/_Logo_horisontal_black.png"
+
+header:
+  - { text: "NEWSLETTER", href: "/#newsletter" }
+  - { text: "BLOG",        href: "/#blog" }
+  - { text: "COMMUNITY",   href: "/#community" }
+
+footer:
+  - { text: "NEWSLETTER", href: "/#newsletter" }
+  - { text: "BLOG",       href: "/#blog" }
+  - { text: "COMMUNITY",  href: "/#community" }
