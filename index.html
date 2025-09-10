@@ -4,61 +4,161 @@ title: NEARWEEK
 ---
 
 <header class="container header">
-  <div class="brand">NEARWEEK</div>
+  <div class="brand">
+    <a href="{{ '/' | relative_url }}" class="brand-link" aria-label="NEARWEEK">
+      <img src="{{ '/images/_logo_horizontal_black.png' | relative_url }}" alt="NEARWEEK" class="brand-logo" />
+    </a>
+  </div>
   <nav class="nav">
-    <a href="#newsletter">NEWSLETTER</a>
-    <a href="#blog">BLOG</a>
-    <a href="#community">COMMUNITY</a>
-    {%- comment -%} Valgfri: {% include theme-toggle.html %} {%- endcomment -%}
+    <a href="#newsletter" class="nav-link">NEWSLETTER</a>
+    <a href="#blog" class="nav-link">BLOG</a>
+    <a href="#community" class="nav-link">COMMUNITY</a>
   </nav>
 </header>
 
-<!-- Hero: tekst + video-kort (passer til .hero-grid/.hero-card i din CSS) -->
+<!-- HERO (video + tekst) -->
+{% assign h = site.data.hero %}
 <section class="container hero-grid">
   <div class="intro stack">
-    <h1 class="h1">THE END IS NEAR</h1>
-    <p class="lead">NEARWEEK deliver curated news, insightful analysis, and real-time updates on the builders, projects, and innovations shaping the future of AI x Web3.</p>
-    <p class="lead">Our mission is to connect the global NEAR community with trusted information, enabling everyone to understand, participate in, and help build the open web.</p>
-    <p class="lead">Stay informed. Stay early. Stay NEAR.</p>
+    <h1 class="h1">{{ h.title }}</h1>
+    <p class="lead">{{ h.subtitle }}</p>
+    {% if h.body %}
+      <p class="lead">{{ h.body }}</p>
+    {% endif %}
   </div>
 
   <div class="hero-card">
-    <video autoplay loop muted playsinline>
-      <source src="{{ '/images/webpage_loop_small.mp4' | relative_url }}" type="video/mp4">
+    <video autoplay loop muted playsinline poster="{{ h.poster | relative_url }}">
+      <source src="{{ h.video | relative_url }}" type="video/mp4">
     </video>
   </div>
 </section>
 
-<!-- Hero Cards Marquee -->
-<section class="section">
-  <div class="container">
-    {% include cards-marquee.html %}
+<!-- MARQUEE: Cards fra _data/cards_marquee.yml  -->
+<section class="section" aria-label="Highlights">
+  <div class="marquee-cards" id="highlights">
+    <div class="marquee-track">
+      {% for card in site.data.cards_marquee %}
+        <a class="card card--marquee" href="{{ card.link }}" target="_blank" rel="noopener">
+          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+          <div class="card-meta">
+            <h3>{{ card.title }}</h3>
+            {% if card.description %}<p>{{ card.description }}</p>{% endif %}
+          </div>
+        </a>
+      {% endfor %}
+      <!-- duplikeret loop for endeløs scroll -->
+      {% for card in site.data.cards_marquee %}
+        <a class="card card--marquee" href="{{ card.link }}" target="_blank" rel="noopener">
+          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+          <div class="card-meta">
+            <h3>{{ card.title }}</h3>
+            {% if card.description %}<p>{{ card.description }}</p>{% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
-<!-- Cards (hentes fra _data/cards.yml via _includes/cards.html) -->
-<section id="blog" class="container section cards-row">
-  {% include cards.html %}
+<!-- CARDS GRID: fra _data/cards.yml -->
+<section id="blog" class="container section cards-row" aria-label="Latest">
+  {% for card in site.data.cards %}
+    <article class="card">
+      <div class="card-media">
+        {% if card.image %}
+          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+        {% endif %}
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">{{ card.title }}</h3>
+        {% if card.description %}<p class="card-subtitle">{{ card.description }}</p>{% endif %}
+        {% if card.link %}
+          <a href="{{ card.link }}" class="card-link" target="_blank" rel="noopener">Læs mere →</a>
+        {% endif %}
+      </div>
+    </article>
+  {% endfor %}
 </section>
 
-<!-- Giant visual (det store billede midt på siden) -->
-<section class="hero-image">
- <img src="{{ '/images/giant-visual.jpg' | relative_url }}" alt="">
-</section>
-
-<!-- CTA / Newsletter -->
+<!-- CTA / NEWSLETTER -->
 <section id="newsletter" class="container cta">
-  <h2 class="big">DATA IS POWER.</h2>
-  <p class="sub">BUILD THE FUTURE YOU WANT TO PASS TO FUTURE GENERATIONS.</p>
-  <a class="cta-button" href="https://nearweek.com/newsletter" target="_blank" rel="noopener">
-    SIGN UP FOR THE OFFICIAL NEAR NEWSLETTER <span aria-hidden>↗</span>
-  </a>
-  <p class="since">IN THE TRENCHES SINCE 2021</p>
+  <h2>DATA IS POWER.</h2>
+  <p>BUILD THE FUTURE YOU WANT TO PASS TO FUTURE GENERATIONS.</p>
+  <p>
+    <a class="cta-link" href="https://nearweek.com/newsletter" target="_blank" rel="noopener">
+      SIGN UP FOR THE OFFICIAL NEAR NEWSLETTER →
+    </a>
+  </p>
+  <small class="since">IN THE TRENCHES SINCE 2021</small>
 </section>
 
-<footer class="container footer">
-  <div class="logo">NEARWEEK</div>
-  <nav class="nav"><a>NEWSLETTER</a><a>BLOG</a><a>COMMUNITY</a></nav>
-  <div class="socials">◎ ◎ ◎</div>
+<footer id="community" class="container footer">
+  <div class="footer-brand">
+    <img src="{{ '/images/_logo_horizontal_white.png' | relative_url }}" alt="NEARWEEK" class="brand-logo brand-logo--footer" />
+  </div>
+  <nav class="footer-nav">
+    <a href="#newsletter" class="nav-link">NEWSLETTER</a>
+    <a href="#blog" class="nav-link">BLOG</a>
+    <a href="#community" class="nav-link">COMMUNITY</a>
+  </nav>
   <small>2025, NEARWEEK. All rights reserved.</small>
 </footer>
+
+<!-- Marquee interaktion (pause on hover + drag/touch) -->
+<script>
+  (function () {
+    const marquee = document.querySelector('.marquee-cards');
+    const track = document.querySelector('.marquee-track');
+    if (!marquee || !track) return;
+
+    // CSS-variabler til hastighed (kan styles i CSS)
+    let speed = 60; // px/sek
+    let raf, last;
+    let playing = true;
+
+    function step(ts) {
+      if (!last) last = ts;
+      const dt = (ts - last) / 1000;
+      last = ts;
+
+      if (playing) {
+        const x = (parseFloat(getComputedStyle(track).getPropertyValue('--x')) || 0) - speed * dt;
+        track.style.setProperty('--x', x);
+      }
+      raf = requestAnimationFrame(step);
+    }
+
+    // Pause på hover
+    marquee.addEventListener('mouseenter', () => playing = false);
+    marquee.addEventListener('mouseleave', () => playing = true);
+
+    // Drag / swipe
+    let dragging = false, startX = 0, startOffset = 0;
+    function pointerDown(e) {
+      dragging = true;
+      playing = false;
+      startX = e.touches ? e.touches[0].clientX : e.clientX;
+      startOffset = parseFloat(getComputedStyle(track).getPropertyValue('--x')) || 0;
+    }
+    function pointerMove(e) {
+      if (!dragging) return;
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      track.style.setProperty('--x', startOffset + (x - startX));
+    }
+    function pointerUp() {
+      dragging = false;
+      playing = true;
+    }
+    marquee.addEventListener('mousedown', pointerDown);
+    window.addEventListener('mousemove', pointerMove);
+    window.addEventListener('mouseup', pointerUp);
+    marquee.addEventListener('touchstart', pointerDown, {passive:true});
+    window.addEventListener('touchmove', pointerMove, {passive:true});
+    window.addEventListener('touchend', pointerUp);
+
+    // Start
+    track.style.setProperty('--x', 0);
+    raf = requestAnimationFrame(step);
+  })();
+</script>
