@@ -54,16 +54,16 @@
 <body>
 
   <!-- Header (logo + nav from _data/nav.yml) -->
-  <header class="container header">
-    <a class="brand" href="{{ '/' | relative_url }}">
-      <img class="brand-logo" src="{{ site.data.nav.logo_header | relative_url }}" alt="NEARWEEK">
-    </a>
-    <nav class="nav">
-      {% for item in site.data.nav.header %}
-        <a href="{{ item.href | relative_url }}">{{ item.text }}</a>
-      {% endfor %}
-    </nav>
-  </header>
+<header class="container header">
+  <a href="/" class="brand">
+    <img src="{{ site.data.nav.logo_header | relative_url }}" alt="NEARWEEK" class="brand-logo">
+  </a>
+  <nav class="nav">
+    {% for item in site.data.nav.header %}
+      <a href="{{ item.href }}">{{ item.text }}</a>
+    {% endfor %}
+  </nav>
+</header>
 
   {{ content }}
 
