@@ -1,0 +1,15 @@
+light:
+  bg:    "#ffffff"
+  text:  "#0a0a0a"
+  muted: "#6b7280"
+  card:  "#ffffff"
+  border:"#e5e7eb"
+  accent:"#0d0d0d"
+
+dark:
+  bg:    "#0b0d12"
+  text:  "#eaeef6"
+  muted: "#a3a9b7"
+  card:  "#131722"
+  border:"#1e2533"
+  accent:"#ffffff"
