@@ -166,3 +166,4 @@ img, video { max-width: 100%; display: block; }
 
 /* ========== DEBUG (midlertidig) ========== */
 /* body { outline: 4px solid magenta; } */
+/* .brand-logo--footer { filter: invert(1); }  */ /* fjern – du skifter logo via <picture> */
