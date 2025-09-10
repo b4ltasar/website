@@ -3,165 +3,57 @@ layout: default
 title: NEARWEEK
 ---
 
-<header class="container header">
-  <a href="{{ '/' | relative_url }}" aria-label="NEARWEEK">
-    <picture>
-      <!-- Hvidt logo i dark mode -->
-      <source srcset="{{ '/images/_logo_horizontal_white.png' | relative_url }}" media="(prefers-color-scheme: dark)">
-      <!-- Sort logo i light mode -->
-      <img class="brand-logo" src="{{ '/images/_logo_horizontal_black.png' | relative_url }}" alt="NEARWEEK">
-    </picture>
-  </a>
-
-  <nav class="nav">
-    <a href="#newsletter">NEWSLETTER</a>
-    <a href="#blog">BLOG</a>
-    <a href="#community">COMMUNITY</a>
-  </nav>
-</header>
-
-<!-- HERO (video + tekst) -->
-{% assign h = site.data.hero %}
+<!-- HERO (text + media from _data/hero.yml) -->
 <section class="container hero-grid">
-  <div class="intro stack">
-    <h1 class="h1">{{ h.title }}</h1>
-    <p class="lead">{{ h.subtitle }}</p>
-    {% if h.body %}
-      <p class="lead">{{ h.body }}</p>
+  <div class="stack intro">
+    <h1 class="h1">{{ site.data.hero.title }}</h1>
+    {% if site.data.hero.subtitle %}
+      <p class="lead">{{ site.data.hero.subtitle }}</p>
+    {% endif %}
+    {% if site.data.hero.paragraphs %}
+      {% for p in site.data.hero.paragraphs %}
+        <p class="lead">{{ p }}</p>
+      {% endfor %}
     {% endif %}
   </div>
 
-<div class="hero-card">
-  <video autoplay loop muted playsinline>
-    <source src="{{ '/images/webpage_loop_small.mp4' | relative_url }}" type="video/mp4">
-  </video>
-</div>
-
-<!-- MARQUEE: Cards fra _data/cards_marquee.yml -->
-<section class="section" aria-label="Highlights">
-  <div class="cards-marquee" id="highlights">
-    <div class="cards-track">
-      {% for card in site.data.cards_marquee %}
-        <a class="mcard" href="{{ card.link }}" target="_blank" rel="noopener">
-          <span class="mcard-media">
-            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          </span>
-          <div class="mcard-body">
-            <h3 class="mcard-title">{{ card.title }}</h3>
-            {% if card.description %}<p class="mcard-text">{{ card.description }}</p>{% endif %}
-          </div>
-        </a>
-      {% endfor %}
-      {% for card in site.data.cards_marquee %}
-        <a class="mcard" href="{{ card.link }}" target="_blank" rel="noopener">
-          <span class="mcard-media">
-            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          </span>
-          <div class="mcard-body">
-            <h3 class="mcard-title">{{ card.title }}</h3>
-            {% if card.description %}<p class="mcard-text">{{ card.description }}</p>{% endif %}
-          </div>
-        </a>
-      {% endfor %}
-    </div>
+  <div class="hero-card">
+    {% if site.data.hero.video %}
+      <video autoplay loop muted playsinline>
+        <source src="{{ site.data.hero.video | relative_url }}" type="video/mp4">
+      </video>
+    {% elsif site.data.hero.image %}
+      <img src="{{ site.data.hero.image | relative_url }}" alt="Hero image">
+    {% endif %}
   </div>
 </section>
 
-<!-- CARDS GRID: fra _data/cards.yml -->
-<section id="blog" class="container section cards-row" aria-label="Latest">
-  {% for card in site.data.cards %}
-    <article class="card">
-      <div class="card-media">
-        {% if card.image %}
-          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-        {% endif %}
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">{{ card.title }}</h3>
-        {% if card.description %}<p class="card-subtitle">{{ card.description }}</p>{% endif %}
-        {% if card.link %}
-          <a href="{{ card.link }}" class="card-link" target="_blank" rel="noopener">Læs mere →</a>
-        {% endif %}
-      </div>
-    </article>
-  {% endfor %}
+<!-- MARQUEE: cards (infinite row you can pause/drag with JS) -->
+<section class="section">
+  {% include cards-marquee.html %}
 </section>
 
-<!-- CTA / NEWSLETTER -->
+<!-- CARDS GRID (regular, change data in _data/cards.yml) -->
+<section id="blog" class="container section cards-row">
+  {% include cards.html %}
+</section>
+
+<!-- BIG VISUAL / VIDEO UNDER “DATA IS POWER” -->
+<section class="section">
+  {% if site.data.hero.big_visual_video %}
+    <video autoplay loop muted playsinline class="hero-card" style="aspect-ratio:16/9;width:100%;border-radius:14px;">
+      <source src="{{ site.data.hero.big_visual_video | relative_url }}" type="video/mp4">
+    </video>
+  {% elsif site.data.hero.big_visual_image %}
+    <img src="{{ site.data.hero.big_visual_image | relative_url }}" alt="" class="hero-card" style="aspect-ratio:16/9;width:100%;border-radius:14px;">
+  {% endif %}
+</section>
+
+<!-- CTA -->
 <section id="newsletter" class="container cta">
-  <h2>DATA IS POWER.</h2>
-  <p>BUILD THE FUTURE YOU WANT TO PASS TO FUTURE GENERATIONS.</p>
-  <p>
-    <a class="cta-link" href="https://nearweek.com/newsletter" target="_blank" rel="noopener">
-      SIGN UP FOR THE OFFICIAL NEAR NEWSLETTER →
-    </a>
-  </p>
-  <small class="since">IN THE TRENCHES SINCE 2021</small>
+  <h2 class="big">{{ site.data.footer.cta_title }}</h2>
+  <p class="sub">{{ site.data.footer.cta_sub }}</p>
+  <a class="cta-button" href="{{ site.data.footer.cta_link | relative_url }}" target="_blank" rel="noopener">
+    {{ site.data.footer.cta_label }}
+  </a>
 </section>
-
-<footer id="community" class="container footer">
-  <div class="footer-brand">
-   <!-- Footer brand -->
-<img src="{{ '/images/_logo_horizontal_black.png' | relative_url }}" alt="NEARWEEK" class="brand-logo brand-logo--footer" />
-  </div>
-  <nav class="footer-nav">
-    <a href="#newsletter" class="nav-link">NEWSLETTER</a>
-    <a href="#blog" class="nav-link">BLOG</a>
-    <a href="#community" class="nav-link">COMMUNITY</a>
-  </nav>
-  <small>2025, NEARWEEK. All rights reserved.</small>
-</footer>
-
-<!-- Marquee interaktion (pause on hover + drag/touch) -->
-<script>
-(function () {
-  const wrap  = document.querySelector('.cards-marquee');
-  const track = document.querySelector('.cards-track');
-  if (!wrap || !track) return;
-
-  let speed = 60;           // px/sek
-  let playing = true;
-  let raf, lastTs;
-
-  function tick(ts){
-    if (!lastTs) lastTs = ts;
-    const dt = (ts - lastTs) / 1000;
-    lastTs = ts;
-
-    if (playing){
-      const x = (parseFloat(getComputedStyle(track).getPropertyValue('--x')) || 0) - speed * dt;
-      track.style.setProperty('--x', x);
-    }
-    raf = requestAnimationFrame(tick);
-  }
-
-  // pause ved hover
-  wrap.addEventListener('mouseenter', () => playing = false);
-  wrap.addEventListener('mouseleave', () => playing = true);
-
-  // drag/swipe
-  let dragging = false, startX = 0, startOffset = 0;
-  function down(e){
-    dragging = true; playing = false;
-    startX = (e.touches ? e.touches[0].clientX : e.clientX);
-    startOffset = parseFloat(getComputedStyle(track).getPropertyValue('--x')) || 0;
-  }
-  function move(e){
-    if (!dragging) return;
-    const x = (e.touches ? e.touches[0].clientX : e.clientX);
-    track.style.setProperty('--x', String(startOffset + (x - startX)));
-  }
-  function up(){ dragging = false; playing = true; }
-
-  wrap.addEventListener('mousedown', down);
-  window.addEventListener('mousemove', move);
-  window.addEventListener('mouseup', up);
-  wrap.addEventListener('touchstart', down, {passive:true});
-  window.addEventListener('touchmove', move, {passive:true});
-  window.addEventListener('touchend', up);
-
-  // start
-  track.style.setProperty('--x', '0');
-  raf = requestAnimationFrame(tick);
-})();
-</script>
