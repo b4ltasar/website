@@ -1,0 +1,14 @@
+<div class="cards-container">
+  {% for card in site.data.cards %}
+  <div class="card">
+    {% if card.image %}
+    <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+    {% endif %}
+    <h3>{{ card.title }}</h3>
+    <p>{{ card.description }}</p>
+    {% if card.link %}
+    <a href="{{ card.link }}" class="card-link">Læs mere</a>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
