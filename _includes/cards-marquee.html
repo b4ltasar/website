@@ -1,29 +1,26 @@
-{% assign items = include.data | default: site.data.cards_marquee | default: site.data.cards %}
-<div class="cards-marquee" style="--speed: {{ include.speed | default: '40s' }}">
-  <div class="cards-track">
-    {% for card in items %}
-      <article class="mcard">
-        <a class="mcard-media" href="{{ card.link }}" target="_blank" rel="noopener"
-           style="--pos: {{ card.position | default: '50% 50%' }}">
-          {% if card.image %}<img src="{{ card.image | relative_url }}" alt="{{ card.title }}">{% endif %}
-        </a>
-        <div class="mcard-body">
-          <h3 class="mcard-title">{{ card.title }}</h3>
-          {% if card.description %}<p class="mcard-text">{{ card.description }}</p>{% endif %}
-        </div>
-      </article>
-    {% endfor %}
-    {% for card in items %}
-      <article class="mcard">
-        <a class="mcard-media" href="{{ card.link }}" target="_blank" rel="noopener"
-           style="--pos: {{ card.position | default: '50% 50%' }}">
-          {% if card.image %}<img src="{{ card.image | relative_url }}" alt="{{ card.title }}">{% endif %}
-        </a>
-        <div class="mcard-body">
-          <h3 class="mcard-title">{{ card.title }}</h3>
-          {% if card.description %}<p class="mcard-text">{{ card.description }}</p>{% endif %}
-        </div>
-      </article>
-    {% endfor %}
-  </div>
+<div class="cards-track" id="cardsTrack">
+  {% for card in site.data.cards_marquee %}
+    <a class="mcard" href="{{ card.link | relative_url }}">
+      <span class="mcard-media">
+        <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+      </span>
+      <div class="mcard-body">
+        <div class="mcard-title">{{ card.title }}</div>
+        {% if card.text %}<div class="mcard-text">{{ card.text }}</div>{% endif %}
+      </div>
+    </a>
+  {% endfor %}
+
+  {% comment %} duplikér én gang for uendelig rul {% endcomment %}
+  {% for card in site.data.cards_marquee %}
+    <a class="mcard" href="{{ card.link | relative_url }}">
+      <span class="mcard-media">
+        <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+      </span>
+      <div class="mcard-body">
+        <div class="mcard-title">{{ card.title }}</div>
+        {% if card.text %}<div class="mcard-text">{{ card.text }}</div>{% endif %}
+      </div>
+    </a>
+  {% endfor %}
 </div>
