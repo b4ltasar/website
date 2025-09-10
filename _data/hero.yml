@@ -1,4 +1,16 @@
 title: "NEARWEEK"
-kicker: "EXPLORING WHERE AI MEETS CRYPTO"
-video: "/images/webpage_loop_small.mp4"
-video2: "/images/webpage_loop2.mp4"   # den store video over CTA
+subtitle: "EXPLORING WHERE AI MEETS CRYPTO"
+
+# Hero media (right card)
+video: "/images/webpage_loop_small.mp4"   # or comment this and use image:
+# image: "/images/hero-graphic.jpg"
+
+# Optional extra paragraphs under the subtitle
+paragraphs:
+  - "NEARWEEK deliver curated news, insightful analysis, and real-time updates on the builders, projects, and innovations shaping the future of AI x Web3."
+  - "Our mission is to connect the global NEAR community with trusted information, enabling everyone to understand, participate in, and help build the open web."
+  - "Stay informed. Stay early. Stay NEAR."
+
+# Big visual under the cards (choose video OR image)
+big_visual_video: "/images/webpage_loop2.mp4"
+# big_visual_image: "/images/giant-visual.jpg"
