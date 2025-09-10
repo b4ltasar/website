@@ -1,7 +1,13 @@
-<div class="marquee">
+<div class="marquee" aria-label="Running updates">
   <div class="marquee-content">
     {% for item in site.data.marquee %}
-    <span>{{ item.text }}</span>
+      {% assign line = item.text | default: item %}
+      <span>{{ line }}</span>
+    {% endfor %}
+    {% comment %} duplikér for sømløs scroll {% endcomment %}
+    {% for item in site.data.marquee %}
+      {% assign line = item.text | default: item %}
+      <span>{{ line }}</span>
     {% endfor %}
   </div>
 </div>
