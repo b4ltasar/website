@@ -1,0 +1,15 @@
+# Cards data - rediger dette for at ændre kort på siden
+- title: "Projekt 1"
+  description: "Beskrivelse af dit første projekt"
+  image: "/images/projekt1.jpg"
+  link: "https://github.com/b4ltasar/projekt1"
+  
+- title: "Projekt 2"
+  description: "Beskrivelse af dit andet projekt"
+  image: "/images/projekt2.jpg"
+  link: "https://github.com/b4ltasar/projekt2"
+
+- title: "Blog Post"
+  description: "En interessant blog post om web development"
+  image: "/images/blog1.jpg"
+  link: "/blog/post-1"
