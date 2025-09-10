@@ -1,10 +1,8 @@
 logo_header: "/images/_Logo_horisontal_black.png"
-
 header:
   - { text: "NEWSLETTER", href: "/#newsletter" }
   - { text: "BLOG",        href: "/#blog" }
   - { text: "COMMUNITY",   href: "/#community" }
-
 footer:
   - { text: "NEWSLETTER", href: "/#newsletter" }
   - { text: "BLOG",       href: "/#blog" }
