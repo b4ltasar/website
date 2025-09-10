@@ -1,0 +1,10 @@
+<header class="container header">
+  <div class="brand">
+    <img class="logo" src="{{ site.data.nav.brand_logo | relative_url }}" alt="NEARWEEK">
+  </div>
+  <nav class="nav">
+    {% for item in site.data.nav.links %}
+      <a href="{{ item.href }}">{{ item.label }}</a>
+    {% endfor %}
+  </nav>
+</header>
