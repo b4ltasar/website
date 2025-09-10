@@ -4,15 +4,17 @@ title: NEARWEEK
 ---
 
 <header class="container header">
-  <div class="brand">
-    <a href="{{ '/' | relative_url }}" class="brand-link" aria-label="NEARWEEK">
-      <img src="{{ '/images/_logo_horizontal_black.png' | relative_url }}" alt="NEARWEEK" class="brand-logo" />
-    </a>
-  </div>
+  <a href="{{ '/' | relative_url }}" aria-label="NEARWEEK">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="{{ '/images/_logo_horizontal_white.png' | relative_url }}">
+      <img src="{{ '/images/_logo_horizontal_black.png' | relative_url }}" alt="NEARWEEK" class="brand-logo">
+    </picture>
+  </a>
+
   <nav class="nav">
-    <a href="#newsletter" class="nav-link">NEWSLETTER</a>
-    <a href="#blog" class="nav-link">BLOG</a>
-    <a href="#community" class="nav-link">COMMUNITY</a>
+    {% for item in site.data.nav %}
+      <a href="{{ item.href }}">{{ item.label }}</a>
+    {% endfor %}
   </nav>
 </header>
 
