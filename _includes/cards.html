@@ -1,14 +1,20 @@
 <div class="cards-container">
   {% for card in site.data.cards %}
-  <div class="card">
-    {% if card.image %}
-    <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-    {% endif %}
-    <h3>{{ card.title }}</h3>
-    <p>{{ card.description }}</p>
-    {% if card.link %}
-    <a href="{{ card.link }}" class="card-link">Læs mere</a>
-    {% endif %}
-  </div>
+    {% assign pos = card.position | default: "50% 50%" %}
+    {% assign asp = card.aspect   | default: "16/9" %}
+    <div class="card">
+      {% if card.image %}
+        <div class="card-media" style="--pos: {{ pos }}; --asp: {{ asp }};">
+          <img src="{{ card.image | relative_url }}" alt="{{ card.title | escape }}">
+        </div>
+      {% endif %}
+
+      <h3 class="card-title">{{ card.title }}</h3>
+      {% if card.description %}<p class="card-text">{{ card.description }}</p>{% endif %}
+
+      {% if card.link %}
+        <a href="{{ card.link }}" class="card-link" target="_blank" rel="noopener">Læs mere →</a>
+      {% endif %}
+    </div>
   {% endfor %}
 </div>
