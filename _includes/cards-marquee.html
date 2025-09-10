@@ -1,14 +1,11 @@
-{% assign items = site.data.cards | default: [] %}
-{% if items.size > 0 %}
-<div class="cards-marquee" aria-label="Featured posts">
+{% assign items = include.data | default: site.data.cards_marquee | default: site.data.cards %}
+<div class="cards-marquee" style="--speed: {{ include.speed | default: '40s' }}">
   <div class="cards-track">
     {% for card in items %}
       <article class="mcard">
         <a class="mcard-media" href="{{ card.link }}" target="_blank" rel="noopener"
            style="--pos: {{ card.position | default: '50% 50%' }}">
-          {% if card.image %}
-            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          {% endif %}
+          {% if card.image %}<img src="{{ card.image | relative_url }}" alt="{{ card.title }}">{% endif %}
         </a>
         <div class="mcard-body">
           <h3 class="mcard-title">{{ card.title }}</h3>
@@ -16,15 +13,11 @@
         </div>
       </article>
     {% endfor %}
-
-    {# dupliker én gang for sømløs scroll #}
     {% for card in items %}
       <article class="mcard">
         <a class="mcard-media" href="{{ card.link }}" target="_blank" rel="noopener"
            style="--pos: {{ card.position | default: '50% 50%' }}">
-          {% if card.image %}
-            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          {% endif %}
+          {% if card.image %}<img src="{{ card.image | relative_url }}" alt="{{ card.title }}">{% endif %}
         </a>
         <div class="mcard-body">
           <h3 class="mcard-title">{{ card.title }}</h3>
@@ -34,4 +27,3 @@
     {% endfor %}
   </div>
 </div>
-{% endif %}
