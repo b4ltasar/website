@@ -1,0 +1,11 @@
+<footer class="container footer">
+  <div class="footer-brand">
+    <img class="logo" src="{{ site.data.footer.brand_logo | relative_url }}" alt="NEARWEEK">
+  </div>
+  <nav class="footer-nav">
+    {% for item in site.data.footer.links %}
+      <a href="{{ item.href }}">{{ item.label }}</a>
+    {% endfor %}
+  </nav>
+  <small>{{ site.data.footer.copyright }}</small>
+</footer>
