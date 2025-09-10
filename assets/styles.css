@@ -1,137 +1,230 @@
-/* Newsletter Display Styles */
+/* ==========================================================================
+   NEARWEEK — Global Styles (driven by theme.yml)
+   ========================================================================== */
+
+/* ===== Tokens (fra <style> i _layouts/default.html) ========================
+   Forventede CSS-variabler defineret i head vha. site.data.theme:
+   --bg, --text, --muted, --card, --border, --accent
+   --maxw, --gutter, --radius, --grid-min, --grid-gap, --lead-w, --h1, --h2, --p
+   ========================================================================== */
+
+/* Base / Reset (let) */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+html,body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: var(--p, 16px);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+img, video { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: color-mix(in oklab, var(--accent), var(--bg) 80%); color: var(--text); }
+
+/* Focus visibility (a11y) */
+:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--accent), #000 0%);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Containers & Sections */
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.section { padding-block: calc(var(--gutter) * 1.25); }
+.stack > * + * { margin-top: calc(var(--gutter) * .75); } /* lodret rytme */
+
+/* Typography */
+.h1, h1.nw-title { font-size: var(--h1); line-height: 1.05; margin: 0; font-weight: 900; letter-spacing: .01em; }
+h2, .h2 { font-size: var(--h2); line-height: 1.15; margin: 0 0 .25em; font-weight: 800; }
+.nw-lead, .lead { max-width: var(--lead-w); color: var(--muted); margin: 0; }
+
+/* Utilities */
+.muted { color: var(--muted); }
+.center { text-align: center; }
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   Header / Navigation
+   ========================================================================== */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-block: 16px; gap: 16px;
+}
+.brand { font-weight: 900; letter-spacing: .02em; }
+.nav a { margin-left: 22px; font-weight: 600; }
+.nav a:first-child { margin-left: 0; }
+
+/* Theme toggle (optional include) */
+#theme-toggle { padding: 6px 10px; border: 1px solid var(--border); border-radius: 10px; }
+#theme-toggle:hover { background: color-mix(in oklab, var(--card), var(--accent) 6%); }
+
+/* ==========================================================================
+   Hero Grid (intro-tekst til venstre, hero-kort til højre)
+   ========================================================================== */
+.hero-grid {
+  display: grid; gap: 32px; align-items: center;
+  grid-template-columns: 1.1fr .9fr;
+  padding-block: 32px;
+}
+.hero-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  aspect-ratio: 16/10; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-card > img, .hero-card > video { width: 100%; height: 100%; object-fit: cover; }
+
+/* ==========================================================================
+   Cards (din eksisterende struktur fra _includes/cards.html)
+   ========================================================================== */
+.cards-container {
+  display: grid; gap: var(--grid-gap);
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min), 1fr));
+}
+.card {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex; flex-direction: column; min-height: 100%;
+}
+.card-media { aspect-ratio: var(--asp, 16/9); overflow: hidden; }
+.card-media img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: var(--pos, 50% 50%);
+  display: block;
+}
+.card-title { font-size: 20px; margin: 14px 16px 6px; font-weight: 800; letter-spacing: .01em; }
+.card-text { margin: 0 16px 12px; color: var(--muted); }
+.card-link { margin: 0 16px 16px; font-weight: 800; }
+.card-link:hover { text-decoration: underline; }
+
+/* Kvadratiske kort som i mockup (gælder hele kort-rækken under hero) */
+.cards-row .cards-container .card-media { aspect-ratio: 1 / 1; }
+
+/* ==========================================================================
+   Marquee (din _includes/marquee.html)
+   ========================================================================== */
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--border);
+  background: rgba(255,255,255,.015); /* subtilt bånd i light/dark */
+}
+.marquee-content {
+  display: flex; gap: 32px; white-space: nowrap; padding: 10px 0;
+  will-change: transform;
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee-content span { opacity: .9; }
+@keyframes marquee-scroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+@media (prefers-reduced-motion: reduce) { .marquee-content { animation: none; } }
+
+/* ==========================================================================
+   Giant Visual (fuldbredde billede mellem kort og CTA)
+   ========================================================================== */
+.hero-image {
+  margin: 40px auto; max-width: calc(var(--maxw) + var(--gutter) * 2);
+  aspect-ratio: 16 / 6; overflow: hidden; border-radius: 12px;
+}
+.hero-image img, .hero-image video { width: 100%; height: 100%; object-fit: cover; }
+
+/* ==========================================================================
+   Newsletter Card (variabel-drevet)
+   ========================================================================== */
 .newsletter-card {
-    display: flex;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin: 20px 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 20px 0;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
-
 .newsletter-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  border-color: color-mix(in oklab, var(--border), var(--accent) 25%);
 }
-
-.newsletter-thumbnail {
-    flex: 0 0 200px;
-    overflow: hidden;
-}
-
+.newsletter-thumbnail { flex: 0 0 220px; overflow: hidden; }
 .newsletter-thumbnail img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  width: 100%; height: 150px; object-fit: cover; transition: transform .3s ease;
 }
-
-.newsletter-card:hover .newsletter-thumbnail img {
-    transform: scale(1.05);
-}
-
-.newsletter-content {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.newsletter-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin: 0 0 10px 0;
-    line-height: 1.4;
-}
-
-.newsletter-excerpt {
-    color: #6b7280;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0 0 15px 0;
-    flex: 1;
-}
-
-.newsletter-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-}
-
-.newsletter-date {
-    color: #9ca3af;
-    font-size: 0.8rem;
-}
-
+.newsletter-card:hover .newsletter-thumbnail img { transform: scale(1.03); }
+.newsletter-content { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.newsletter-title { font-size: 1.12rem; line-height: 1.35; margin: 0; font-weight: 800; }
+.newsletter-excerpt { color: var(--muted); margin: 0; line-height: 1.55; flex: 1; }
+.newsletter-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.newsletter-date { color: var(--muted); font-size: .85rem; }
 .newsletter-link {
-    background: #3b82f6;
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
+  background: var(--accent); color: var(--bg);
+  text-decoration: none; padding: 10px 16px; border-radius: 10px; font-weight: 800; display: inline-block;
 }
-
-.newsletter-link:hover {
-    background: #2563eb;
-}
-
+.newsletter-link:hover { filter: brightness(.9); text-decoration: none; }
 .newsletter-error {
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #dc2626;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
+  background: rgba(220,38,38,.08); border: 1px solid rgba(220,38,38,.35);
+  color: #fecaca; padding: 14px; border-radius: 12px; text-align: center;
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-    .newsletter-card {
-        flex-direction: column;
-    }
-    
-    .newsletter-thumbnail {
-        flex: none;
-    }
-    
-    .newsletter-thumbnail img {
-        height: 200px;
-    }
-    
-    .newsletter-meta {
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-    }
-    
-    .newsletter-link {
-        align-self: stretch;
-        text-align: center;
-    }
+/* ==========================================================================
+   CTA Section
+   ========================================================================== */
+.cta { text-align: center; padding-block: 48px; }
+.cta .big { font-size: clamp(32px, 7vw, 60px); margin: 0 0 8px; font-weight: 900; }
+.cta .sub { color: var(--muted); margin: 0 0 28px; }
+.cta-button {
+  display: inline-flex; align-items: center; gap: 12px;
+  border: 1.5px solid var(--text); color: var(--text);
+  padding: 18px 28px; border-radius: 10px; font-weight: 900; letter-spacing: .02em;
+  background: transparent;
+}
+.cta-button:hover { background: var(--text); color: var(--bg); text-decoration: none; }
+.cta .since { color: var(--muted); margin-top: 22px; }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  display: grid; gap: 12px; align-items: center; justify-content: space-between;
+  grid-template-columns: 1fr auto auto;
+  padding-block: 28px; border-top: 1px solid var(--border);
+}
+.footer .logo { font-weight: 900; }
+.footer .nav a { margin-left: 18px; }
+.footer .socials { opacity: .85; }
+.footer small { color: var(--muted); display: block; margin-top: 8px; }
+
+/* ==========================================================================
+   Responsive Tweaks
+   ========================================================================== */
+@media (max-width: 1100px){
+  :root { --grid-min: clamp(220px, 38vw, 320px); }
+}
+@media (max-width: 900px){
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-card { order: -1; } /* hero-billede over teksten på mobil (valgfrit) */
+}
+@media (max-width: 720px){
+  :root { --gutter: 18px; --grid-gap: 16px; }
+  .newsletter-card { flex-direction: column; }
+  .newsletter-thumbnail { flex: none; }
+  .newsletter-thumbnail img { height: 200px; }
+  .newsletter-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .newsletter-link { width: 100%; text-align: center; }
+}
+@media (max-width: 520px){
+  :root { --gutter: 16px; --grid-min: 200px; }
+  .card-title { font-size: 18px; }
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    .newsletter-card {
-        background: #1f2937;
-        color: #f9fafb;
-    }
-    
-    .newsletter-title {
-        color: #f9fafb;
-    }
-    
-    .newsletter-excerpt {
-        color: #d1d5db;
-    }
-    
-    .newsletter-date {
-        color: #9ca3af;
-    }
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  .marquee-content, .newsletter-thumbnail img, .newsletter-card { transition: none !important; animation: none !important; }
 }
