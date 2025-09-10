@@ -34,26 +34,29 @@ title: NEARWEEK
   </div>
 </section>
 
-<!-- MARQUEE: Cards fra _data/cards_marquee.yml  -->
+<!-- MARQUEE: Cards fra _data/cards_marquee.yml -->
 <section class="section" aria-label="Highlights">
-  <div class="marquee-cards" id="highlights">
-    <div class="marquee-track">
+  <div class="cards-marquee" id="highlights">
+    <div class="cards-track">
       {% for card in site.data.cards_marquee %}
-        <a class="card card--marquee" href="{{ card.link }}" target="_blank" rel="noopener">
-          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          <div class="card-meta">
-            <h3>{{ card.title }}</h3>
-            {% if card.description %}<p>{{ card.description }}</p>{% endif %}
+        <a class="mcard" href="{{ card.link }}" target="_blank" rel="noopener">
+          <span class="mcard-media">
+            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+          </span>
+          <div class="mcard-body">
+            <h3 class="mcard-title">{{ card.title }}</h3>
+            {% if card.description %}<p class="mcard-text">{{ card.description }}</p>{% endif %}
           </div>
         </a>
       {% endfor %}
-      <!-- duplikeret loop for endeløs scroll -->
       {% for card in site.data.cards_marquee %}
-        <a class="card card--marquee" href="{{ card.link }}" target="_blank" rel="noopener">
-          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          <div class="card-meta">
-            <h3>{{ card.title }}</h3>
-            {% if card.description %}<p>{{ card.description }}</p>{% endif %}
+        <a class="mcard" href="{{ card.link }}" target="_blank" rel="noopener">
+          <span class="mcard-media">
+            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+          </span>
+          <div class="mcard-body">
+            <h3 class="mcard-title">{{ card.title }}</h3>
+            {% if card.description %}<p class="mcard-text">{{ card.description }}</p>{% endif %}
           </div>
         </a>
       {% endfor %}
@@ -95,7 +98,8 @@ title: NEARWEEK
 
 <footer id="community" class="container footer">
   <div class="footer-brand">
-    <img src="{{ '/images/_logo_horizontal_white.png' | relative_url }}" alt="NEARWEEK" class="brand-logo brand-logo--footer" />
+   <!-- Footer brand -->
+<img src="{{ '/images/_logo_horizontal_black.png' | relative_url }}" alt="NEARWEEK" class="brand-logo brand-logo--footer" />
   </div>
   <nav class="footer-nav">
     <a href="#newsletter" class="nav-link">NEWSLETTER</a>
