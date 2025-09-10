@@ -5,7 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-    
+<style>
+:root{
+  --bg: {{ site.data.theme.light.bg }};
+  --text: {{ site.data.theme.light.text }};
+  --muted: {{ site.data.theme.light.muted }};
+  --card: {{ site.data.theme.light.card }};
+  --border: {{ site.data.theme.light.border }};
+  --accent: {{ site.data.theme.light.accent }};
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: {{ site.data.theme.dark.bg }};
+    --text: {{ site.data.theme.dark.text }};
+    --muted: {{ site.data.theme.dark.muted }};
+    --card: {{ site.data.theme.dark.card }};
+    --border: {{ site.data.theme.dark.border }};
+    --accent: {{ site.data.theme.dark.accent }};
+  }
+}
+/* Mulighed for at overstyre med toggle (se step 3) */
+:root[data-theme="light"]{
+  --bg: {{ site.data.theme.light.bg }};
+  --text: {{ site.data.theme.light.text }};
+  --muted: {{ site.data.theme.light.muted }};
+  --card: {{ site.data.theme.light.card }};
+  --border: {{ site.data.theme.light.border }};
+  --accent: {{ site.data.theme.light.accent }};
+}
+:root[data-theme="dark"]{
+  --bg: {{ site.data.theme.dark.bg }};
+  --text: {{ site.data.theme.dark.text }};
+  --muted: {{ site.data.theme.dark.muted }};
+  --card: {{ site.data.theme.dark.card }};
+  --border: {{ site.data.theme.dark.border }};
+  --accent: {{ site.data.theme.dark.accent }};
+}
+</style>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ '/images/favicon.ico' | relative_url }}">
     
