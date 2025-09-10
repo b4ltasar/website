@@ -1,18 +1,86 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title | default: site.title }}</title>
-    <meta name="description" content="{{ page.description | default: site.description }}">
-    
-    <!-- Styles -->
-   <link rel="stylesheet" href="{{ '/assets/styles.css?v=' | append: site.github.build_revision | relative_url }}">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}" />
+
+  <!-- Design tokens from _data/theme.yml -->
+  <style>
+  :root{
+    --bg:    {{ site.data.theme.light.bg }};
+    --text:  {{ site.data.theme.light.text }};
+    --muted: {{ site.data.theme.light.muted }};
+    --card:  {{ site.data.theme.light.card }};
+    --border:{{ site.data.theme.light.border }};
+    --accent:{{ site.data.theme.light.accent }};
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:    {{ site.data.theme.dark.bg }};
+      --text:  {{ site.data.theme.dark.text }};
+      --muted: {{ site.data.theme.dark.muted }};
+      --card:  {{ site.data.theme.dark.card }};
+      --border:{{ site.data.theme.dark.border }};
+      --accent:{{ site.data.theme.dark.accent }};
+    }
+  }
+  /* Optional manual override via data-theme on <html> */
+  :root[data-theme="light"]{
+    --bg:    {{ site.data.theme.light.bg }};
+    --text:  {{ site.data.theme.light.text }};
+    --muted: {{ site.data.theme.light.muted }};
+    --card:  {{ site.data.theme.light.card }};
+    --border:{{ site.data.theme.light.border }};
+    --accent:{{ site.data.theme.light.accent }};
+  }
+  :root[data-theme="dark"]{
+    --bg:    {{ site.data.theme.dark.bg }};
+    --text:  {{ site.data.theme.dark.text }};
+    --muted: {{ site.data.theme.dark.muted }};
+    --card:  {{ site.data.theme.dark.card }};
+    --border:{{ site.data.theme.dark.border }};
+    --accent:{{ site.data.theme.dark.accent }};
+  }
+  </style>
+
+  <!-- CSS (cache-busted so GitHub Pages doesn’t serve an old file) -->
+  <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ '/images/favicon.ico' | relative_url }}">
 </head>
 <body>
-    {{ content }}
+
+  <!-- Header (logo + nav from _data/nav.yml) -->
+  <header class="container header">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img class="brand-logo" src="{{ site.data.nav.logo_header | relative_url }}" alt="NEARWEEK">
+    </a>
+    <nav class="nav">
+      {% for item in site.data.nav.header %}
+        <a href="{{ item.href | relative_url }}">{{ item.text }}</a>
+      {% endfor %}
+    </nav>
+  </header>
+
+  {{ content }}
+
+  <!-- Footer (logo from _data/footer.yml, links from _data/nav.yml) -->
+  <footer class="container footer">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img class="brand-logo brand-logo--footer" src="{{ site.data.footer.logo | relative_url }}" alt="NEARWEEK">
+    </a>
+
+    <nav class="nav">
+      {% for item in site.data.nav.footer %}
+        <a href="{{ item.href | relative_url }}">{{ item.text }}</a>
+      {% endfor %}
+    </nav>
+
+    <small>{{ site.time | date: "%Y" }}, NEARWEEK. All rights reserved.</small>
+  </footer>
+
 </body>
 </html>
