@@ -25,6 +25,10 @@ img, video { max-width: 100%; display: block; }
 .nav { display:flex; gap: 24px; }
 .nav a { opacity:.85; }
 .nav a:hover { opacity:1; }
+.nav a { opacity:.85; transition: transform .15s ease, opacity .15s ease; }
+.nav a:hover { opacity:1; transform: scale(1.2); }
+.footer .nav a:hover { transform: scale(1.2); }
+.brand-logo { height: 28px; display:block; }
 
 /* ========== HERO GRID ========== */
 .hero-grid {
@@ -132,6 +136,7 @@ img, video { max-width: 100%; display: block; }
 .footer { display:grid; gap:12px; align-items:center; grid-template-columns: 1fr auto auto; padding: 28px 0 56px; border-top:1px solid var(--border); margin-top: 56px; }
 .footer .nav { gap:16px; }
 .footer small { color: var(--muted); grid-column: 1 / -1; }
+.brand-logo--footer { height: 28px; display:block; filter: invert(1); } /* kun hvis footer-logo er sort */
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 900px){
