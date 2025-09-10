@@ -1,4 +1,4 @@
-video: "/images/webpage_loop_small.mp4"   # mp4 i /images/
-poster: "/images/hero-graphic.jpg"        # valgfri fallback still
 title: "NEARWEEK"
-subtitle: "EXPLORING WHERE AI MEETS CRYPTO"
+kicker: "EXPLORING WHERE AI MEETS CRYPTO"
+video: "/images/webpage_loop_small.mp4"
+video2: "/images/webpage_loop2.mp4"   # den store video over CTA
