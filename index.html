@@ -111,58 +111,54 @@ title: NEARWEEK
 
 <!-- Marquee interaktion (pause on hover + drag/touch) -->
 <script>
-  (function () {
-    const marquee = document.querySelector('.marquee-cards');
-    const track = document.querySelector('.marquee-track');
-    if (!marquee || !track) return;
+(function () {
+  const wrap  = document.querySelector('.cards-marquee');
+  const track = document.querySelector('.cards-track');
+  if (!wrap || !track) return;
 
-    // CSS-variabler til hastighed (kan styles i CSS)
-    let speed = 60; // px/sek
-    let raf, last;
-    let playing = true;
+  let speed = 60;           // px/sek
+  let playing = true;
+  let raf, lastTs;
 
-    function step(ts) {
-      if (!last) last = ts;
-      const dt = (ts - last) / 1000;
-      last = ts;
+  function tick(ts){
+    if (!lastTs) lastTs = ts;
+    const dt = (ts - lastTs) / 1000;
+    lastTs = ts;
 
-      if (playing) {
-        const x = (parseFloat(getComputedStyle(track).getPropertyValue('--x')) || 0) - speed * dt;
-        track.style.setProperty('--x', x);
-      }
-      raf = requestAnimationFrame(step);
+    if (playing){
+      const x = (parseFloat(getComputedStyle(track).getPropertyValue('--x')) || 0) - speed * dt;
+      track.style.setProperty('--x', x);
     }
+    raf = requestAnimationFrame(tick);
+  }
 
-    // Pause på hover
-    marquee.addEventListener('mouseenter', () => playing = false);
-    marquee.addEventListener('mouseleave', () => playing = true);
+  // pause ved hover
+  wrap.addEventListener('mouseenter', () => playing = false);
+  wrap.addEventListener('mouseleave', () => playing = true);
 
-    // Drag / swipe
-    let dragging = false, startX = 0, startOffset = 0;
-    function pointerDown(e) {
-      dragging = true;
-      playing = false;
-      startX = e.touches ? e.touches[0].clientX : e.clientX;
-      startOffset = parseFloat(getComputedStyle(track).getPropertyValue('--x')) || 0;
-    }
-    function pointerMove(e) {
-      if (!dragging) return;
-      const x = e.touches ? e.touches[0].clientX : e.clientX;
-      track.style.setProperty('--x', startOffset + (x - startX));
-    }
-    function pointerUp() {
-      dragging = false;
-      playing = true;
-    }
-    marquee.addEventListener('mousedown', pointerDown);
-    window.addEventListener('mousemove', pointerMove);
-    window.addEventListener('mouseup', pointerUp);
-    marquee.addEventListener('touchstart', pointerDown, {passive:true});
-    window.addEventListener('touchmove', pointerMove, {passive:true});
-    window.addEventListener('touchend', pointerUp);
+  // drag/swipe
+  let dragging = false, startX = 0, startOffset = 0;
+  function down(e){
+    dragging = true; playing = false;
+    startX = (e.touches ? e.touches[0].clientX : e.clientX);
+    startOffset = parseFloat(getComputedStyle(track).getPropertyValue('--x')) || 0;
+  }
+  function move(e){
+    if (!dragging) return;
+    const x = (e.touches ? e.touches[0].clientX : e.clientX);
+    track.style.setProperty('--x', String(startOffset + (x - startX)));
+  }
+  function up(){ dragging = false; playing = true; }
 
-    // Start
-    track.style.setProperty('--x', 0);
-    raf = requestAnimationFrame(step);
-  })();
+  wrap.addEventListener('mousedown', down);
+  window.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', up);
+  wrap.addEventListener('touchstart', down, {passive:true});
+  window.addEventListener('touchmove', move, {passive:true});
+  window.addEventListener('touchend', up);
+
+  // start
+  track.style.setProperty('--x', '0');
+  raf = requestAnimationFrame(tick);
+})();
 </script>
